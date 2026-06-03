@@ -1,0 +1,2653 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بلدي — توثيق وواجهات المشروع</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #1B3A2D;
+  --primary-light: #2A5442;
+  --accent: #3AC47D;
+  --accent-soft: #EAF3DE;
+  --accent-light: #D4E8DC;
+  --done: #3B6D11;
+  --done-bg: #EAF3DE;
+  --progress: #185FA5;
+  --progress-bg: #E6F1FB;
+  --pending: #854F0B;
+  --pending-bg: #FAEEDA;
+  --high: #A32D2D;
+  --high-bg: #FCEBEB;
+  --medium: #B47A0B;
+  --medium-bg: #FAEEDA;
+  --white: #FFFFFF;
+  --grey50: #F8F9FA;
+  --grey100: #F1F3F5;
+  --grey200: #E9ECEF;
+  --grey300: #DEE2E6;
+  --grey400: #CED4DA;
+  --grey500: #ADB5BD;
+  --grey600: #6C757D;
+  --grey700: #495057;
+  --grey800: #343A40;
+  --border: #E9ECEF;
+  --gold: #FFB300;
+  --muted-dark: #9DBDA9;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 24px rgba(0,0,0,0.12);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Cairo', sans-serif;
+  background: var(--grey50);
+  color: var(--grey800);
+  min-height: 100vh;
+}
+
+/* ─── Layout ──────────────────────────────────────────────────────── */
+.sidebar {
+  position: fixed;
+  top: 0; right: 0;
+  width: 260px; height: 100vh;
+  background: var(--primary);
+  overflow-y: auto;
+  z-index: 100;
+  padding: 0 0 30px;
+}
+.sidebar-header {
+  padding: 24px 20px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  position: sticky; top:0;
+  background: var(--primary);
+  z-index: 2;
+}
+.sidebar-logo {
+  display: flex; align-items: center; gap: 10px;
+}
+.sidebar-logo .icon {
+  width: 36px; height: 36px;
+  background: var(--accent);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.sidebar-logo span {
+  font-size: 20px; font-weight: 700; color: #fff;
+}
+.sidebar-logo small {
+  font-size: 10px; color: var(--muted-dark);
+  display: block; margin-top: 1px;
+}
+
+.nav-section-label {
+  font-size: 9px; font-weight: 700;
+  color: var(--muted-dark);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 18px 20px 6px;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 20px;
+  font-size: 12px; color: rgba(255,255,255,0.7);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+}
+.nav-item:hover, .nav-item.active {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+.nav-item .nav-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.nav-item.active .nav-dot { opacity: 1; }
+
+.main {
+  margin-right: 260px;
+  padding: 0;
+}
+
+/* ─── Page Header ─────────────────────────────────────────────────── */
+.page-section {
+  padding: 48px 40px;
+  border-bottom: 1px solid var(--border);
+}
+.page-section:last-child { border-bottom: none; }
+
+.section-hero {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  color: #fff;
+  padding: 60px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.section-hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; left: -60px;
+  width: 300px; height: 300px;
+  background: rgba(58,196,125,0.12);
+  border-radius: 50%;
+}
+.section-hero h1 {
+  font-size: 36px; font-weight: 800;
+  margin-bottom: 10px;
+  position: relative;
+}
+.section-hero p {
+  font-size: 15px; color: var(--muted-dark);
+  max-width: 600px; line-height: 1.8;
+  position: relative;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  margin-bottom: 16px;
+}
+.stats-row {
+  display: flex; gap: 24px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+.stat-pill {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 10px 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+.stat-pill .num {
+  font-size: 24px; font-weight: 700;
+  color: var(--accent);
+}
+.stat-pill .lbl {
+  font-size: 10px; color: var(--muted-dark);
+}
+
+/* ─── Section Title ───────────────────────────────────────────────── */
+.section-title {
+  font-size: 22px; font-weight: 700;
+  margin-bottom: 8px;
+}
+.section-subtitle {
+  font-size: 13px; color: var(--grey600);
+  margin-bottom: 32px;
+  line-height: 1.7;
+}
+
+/* ─── File Cards ──────────────────────────────────────────────────── */
+.files-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
+}
+.file-card {
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.file-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.file-card-header {
+  padding: 14px 16px 10px;
+  display: flex; align-items: flex-start; gap: 12px;
+  border-bottom: 1px solid var(--grey100);
+}
+.file-icon {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+.file-card-header h3 {
+  font-size: 13px; font-weight: 600; margin-bottom: 2px;
+}
+.file-path {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--grey500);
+}
+.file-card-body { padding: 12px 16px 14px; }
+.file-desc {
+  font-size: 12px; color: var(--grey700);
+  line-height: 1.7; margin-bottom: 10px;
+}
+.feature-tags {
+  display: flex; flex-wrap: wrap; gap: 5px;
+}
+.tag {
+  background: var(--grey100);
+  color: var(--grey700);
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+.tag.green { background: var(--done-bg); color: var(--done); }
+.tag.blue { background: var(--progress-bg); color: var(--progress); }
+.tag.orange { background: var(--pending-bg); color: var(--pending); }
+.tag.red { background: var(--high-bg); color: var(--high); }
+
+/* ─── Firebase Steps ──────────────────────────────────────────────── */
+.steps-list { display: flex; flex-direction: column; gap: 0; }
+.step {
+  display: flex; gap: 20px;
+  position: relative;
+}
+.step:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  top: 40px; right: 19px;
+  width: 2px; bottom: 0;
+  background: var(--border);
+}
+.step-num {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  font-size: 14px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  position: relative; z-index: 1;
+}
+.step-content {
+  flex: 1;
+  padding-bottom: 32px;
+}
+.step-content h3 {
+  font-size: 15px; font-weight: 600; margin-bottom: 6px;
+  padding-top: 8px;
+}
+.step-content p {
+  font-size: 12px; color: var(--grey600);
+  line-height: 1.8; margin-bottom: 10px;
+}
+.code-block {
+  background: #0d1117;
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #e6edf3;
+  margin: 8px 0;
+  overflow-x: auto;
+  line-height: 1.7;
+  white-space: pre;
+}
+.code-block .comment { color: #8b949e; }
+.code-block .keyword { color: #ff7b72; }
+.code-block .string { color: #a5d6ff; }
+.code-block .accent-code { color: #3AC47D; }
+
+/* ─── Phone Mockup ────────────────────────────────────────────────── */
+.screens-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 24px;
+}
+.phone-wrapper {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.phone-label {
+  font-size: 11px; font-weight: 600; color: var(--grey600);
+  text-align: center;
+}
+.phone {
+  width: 180px;
+  background: var(--grey800);
+  border-radius: 28px;
+  padding: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  position: relative;
+}
+.phone::before {
+  content: '';
+  position: absolute;
+  top: 14px; left: 50%; transform: translateX(-50%);
+  width: 50px; height: 5px;
+  background: #111;
+  border-radius: 3px;
+  z-index: 5;
+}
+.phone-screen {
+  background: #fff;
+  border-radius: 22px;
+  overflow: hidden;
+  min-height: 360px;
+  position: relative;
+}
+
+/* ─── Screen: Splash ──────────────────────────────────────────────── */
+.screen-splash {
+  background: var(--primary);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  min-height: 360px; gap: 12px;
+}
+.splash-icon {
+  width: 70px; height: 70px;
+  background: var(--accent);
+  border-radius: 20px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 34px;
+  box-shadow: 0 8px 24px rgba(58,196,125,0.4);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { transform: scale(1); box-shadow: 0 8px 24px rgba(58,196,125,0.4); }
+  50% { transform: scale(1.05); box-shadow: 0 12px 36px rgba(58,196,125,0.6); }
+}
+.splash-title { color: #fff; font-size: 22px; font-weight: 800; }
+.splash-sub { color: var(--muted-dark); font-size: 10px; }
+.splash-dots { display: flex; gap: 5px; margin-top: 8px; }
+.splash-dots span { width: 6px; height: 6px; background: rgba(255,255,255,0.3); border-radius: 50%; }
+.splash-dots span:first-child { background: var(--accent); width: 18px; border-radius: 3px; }
+
+/* ─── Screen: Onboarding ──────────────────────────────────────────── */
+.screen-onboarding {
+  background: var(--primary);
+  display: flex; flex-direction: column;
+  align-items: center;
+  min-height: 360px;
+  padding: 24px 16px 16px;
+  position: relative;
+}
+.ob-skip {
+  position: absolute; top: 14px; left: 12px;
+  background: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.8);
+  font-size: 9px; padding: 3px 8px;
+  border-radius: 12px; font-family: 'Cairo', sans-serif;
+}
+.ob-emoji-box {
+  width: 80px; height: 80px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 24px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40px;
+  margin: 20px 0 16px;
+}
+.ob-title { color: #fff; font-size: 18px; font-weight: 700; text-align: center; }
+.ob-desc { color: var(--muted-dark); font-size: 9px; text-align: center; line-height: 1.7; margin: 6px 0 16px; }
+.ob-dots { display: flex; gap: 4px; margin-bottom: 14px; }
+.ob-dots span { width: 6px; height: 6px; background: rgba(255,255,255,0.25); border-radius: 3px; }
+.ob-dots span.active { width: 18px; background: var(--accent); }
+.ob-btn {
+  width: 100%;
+  background: var(--accent);
+  color: #fff;
+  border: none; border-radius: 10px;
+  padding: 10px; font-size: 11px; font-weight: 700;
+  font-family: 'Cairo', sans-serif; cursor: pointer;
+}
+
+/* ─── Screen: Login ───────────────────────────────────────────────── */
+.screen-login {
+  display: flex; flex-direction: column;
+  min-height: 360px;
+}
+.login-top {
+  background: var(--primary);
+  padding: 18px 16px 24px;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.login-top-icon {
+  width: 40px; height: 40px;
+  background: var(--accent);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+.login-top h2 { color: #fff; font-size: 15px; font-weight: 700; }
+.login-top p { color: var(--muted-dark); font-size: 9px; }
+.login-card {
+  flex: 1; background: #fff;
+  border-radius: 20px 20px 0 0;
+  padding: 14px 14px;
+  margin-top: -10px;
+}
+.form-label { font-size: 9px; font-weight: 600; color: var(--grey600); margin-bottom: 4px; }
+.form-input {
+  width: 100%; background: var(--grey100);
+  border: 0.5px solid var(--border); border-radius: 8px;
+  padding: 7px 10px; font-size: 10px;
+  font-family: 'Cairo', sans-serif; margin-bottom: 8px;
+  color: var(--grey800);
+}
+.form-input::placeholder { color: var(--grey400); }
+.login-btn {
+  width: 100%; background: var(--primary);
+  color: #fff; border: none; border-radius: 9px;
+  padding: 9px; font-size: 11px; font-weight: 700;
+  font-family: 'Cairo', sans-serif; cursor: pointer; margin-top: 4px;
+}
+.login-link { text-align: center; font-size: 9px; color: var(--grey500); margin-top: 8px; }
+.login-link a { color: var(--primary); font-weight: 600; text-decoration: none; }
+
+/* ─── Screen: Home ────────────────────────────────────────────────── */
+.screen-home {
+  display: flex; flex-direction: column;
+  min-height: 360px; background: var(--grey50);
+}
+.home-topbar {
+  background: var(--primary);
+  padding: 14px 12px 10px;
+}
+.home-topbar-row {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 8px;
+}
+.home-greeting { color: #fff; font-size: 11px; font-weight: 600; }
+.home-notif-btn {
+  width: 26px; height: 26px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; position: relative;
+}
+.home-notif-badge {
+  position: absolute; top: -2px; right: -2px;
+  width: 8px; height: 8px;
+  background: #e53935; border-radius: 50%;
+  border: 1px solid var(--primary);
+}
+.home-search {
+  background: rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 6px 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.home-search span { font-size: 10px; color: rgba(255,255,255,0.5); }
+.stats-row-home {
+  display: flex; gap: 6px;
+  padding: 10px 10px 0;
+}
+.stat-card-home {
+  flex: 1; border-radius: 10px;
+  padding: 8px 6px;
+  text-align: center;
+}
+.stat-card-home .num { font-size: 16px; font-weight: 700; }
+.stat-card-home .lbl { font-size: 8px; color: var(--grey600); }
+.feed-label {
+  font-size: 10px; font-weight: 600;
+  padding: 8px 10px 4px;
+  color: var(--grey800);
+}
+.report-card-mini {
+  margin: 0 10px 8px;
+  background: #fff;
+  border-radius: 10px;
+  border: 0.5px solid var(--border);
+  overflow: hidden;
+}
+.report-img-mini {
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent-light), var(--grey200));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; position: relative;
+}
+.severity-chip {
+  position: absolute; top: 4px; right: 4px;
+  font-size: 8px; padding: 2px 6px;
+  border-radius: 6px; font-weight: 600;
+}
+.report-card-mini-body { padding: 7px 8px 8px; }
+.report-title-mini { font-size: 10px; font-weight: 600; }
+.report-addr-mini { font-size: 8px; color: var(--grey500); margin-bottom: 5px; }
+.report-meta-row {
+  display: flex; align-items: center; gap: 5px;
+}
+.vote-btn-mini {
+  font-size: 8px; padding: 2px 7px;
+  background: var(--grey100); border-radius: 5px; color: var(--grey600);
+}
+.status-badge-mini {
+  font-size: 7px; padding: 2px 6px;
+  border-radius: 10px; font-weight: 600;
+  margin-right: auto;
+}
+.home-bottom-nav {
+  display: flex; align-items: center;
+  background: #fff; border-top: 0.5px solid var(--border);
+  padding: 6px 0 4px;
+  margin-top: auto;
+}
+.nav-tab {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; gap: 2px;
+  font-size: 8px; color: var(--grey500);
+}
+.nav-tab.active { color: var(--primary); }
+.nav-tab .dot { width: 3px; height: 3px; background: var(--accent); border-radius: 50%; }
+.nav-tab .icon { font-size: 14px; }
+.nav-fab {
+  width: 44px; height: 44px;
+  background: var(--primary);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; color: #fff;
+  margin-top: -18px;
+  box-shadow: 0 4px 14px rgba(27,58,45,0.4);
+  flex-shrink: 0;
+}
+
+/* ─── Screen: Add Report ──────────────────────────────────────────── */
+.screen-add {
+  display: flex; flex-direction: column;
+  min-height: 360px; background: #fff;
+}
+.add-appbar {
+  background: var(--primary);
+  padding: 12px 12px 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+.add-appbar span { color: #fff; font-size: 12px; font-weight: 700; }
+.add-close {
+  width: 22px; height: 22px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; color: #fff;
+}
+.add-body { padding: 12px; flex: 1; overflow: hidden; }
+.add-section-label {
+  font-size: 9px; font-weight: 600;
+  color: var(--grey600); margin-bottom: 5px;
+}
+.add-img-box {
+  height: 70px;
+  background: var(--grey100);
+  border: 1px dashed var(--grey300);
+  border-radius: 10px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 3px; margin-bottom: 10px; cursor: pointer;
+  font-size: 18px;
+}
+.add-img-box span { font-size: 9px; color: var(--grey500); }
+.add-location {
+  background: var(--grey100);
+  border-radius: 8px; padding: 8px 10px;
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 10px;
+}
+.add-location .addr { font-size: 9px; color: var(--grey500); flex: 1; }
+.add-location .gps-btn {
+  background: var(--primary); color: #fff;
+  font-size: 8px; padding: 4px 8px; border-radius: 6px;
+  font-family: 'Cairo', sans-serif; border: none; cursor: pointer;
+}
+.severity-row { display: flex; gap: 5px; margin-bottom: 10px; }
+.sev-opt {
+  flex: 1; border-radius: 8px; padding: 7px 3px;
+  text-align: center; border: 0.5px solid var(--border);
+  cursor: pointer; font-size: 14px;
+}
+.sev-opt .sev-lbl { font-size: 8px; font-weight: 600; display: block; margin-top: 2px; }
+.sev-opt.active-high { border-color: var(--high); background: var(--high-bg); }
+.sev-opt.active-high .sev-lbl { color: var(--high); }
+.sev-opt.active-med { border-color: var(--medium); background: var(--medium-bg); }
+.sev-opt.active-low { border-color: var(--done); background: var(--done-bg); }
+.add-submit {
+  width: 100%; background: var(--primary);
+  color: #fff; border: none; border-radius: 9px;
+  padding: 9px; font-size: 11px; font-weight: 700;
+  font-family: 'Cairo', sans-serif; margin-top: 4px;
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+}
+
+/* ─── Screen: Tracking ────────────────────────────────────────────── */
+.screen-track {
+  display: flex; flex-direction: column;
+  min-height: 360px; background: #fff;
+}
+.track-header {
+  background: var(--primary); padding: 12px;
+}
+.track-card {
+  background: var(--primary-light);
+  border-radius: 10px; padding: 10px;
+  display: flex; gap: 8px; align-items: center;
+  margin: 0 12px 16px; margin-top: -1px;
+}
+.track-title { font-size: 10px; font-weight: 600; color: #fff; }
+.track-addr { font-size: 8px; color: var(--muted-dark); }
+.track-body { padding: 14px 14px; flex: 1; }
+.timeline { position: relative; }
+.tl-item {
+  display: flex; gap: 10px; margin-bottom: 20px; position: relative;
+}
+.tl-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 22px; right: 11px;
+  width: 2px; height: calc(100% + 4px);
+  background: var(--border);
+}
+.tl-item.done::after { background: var(--accent); }
+.tl-dot {
+  width: 22px; height: 22px;
+  border-radius: 50%; background: var(--grey200);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 10px; position: relative; z-index: 1;
+}
+.tl-dot.done { background: var(--accent); }
+.tl-dot.current { background: var(--primary); border: 2px solid var(--accent); }
+.tl-content { flex: 1; }
+.tl-title { font-size: 10px; font-weight: 600; color: var(--grey800); }
+.tl-title.inactive { color: var(--grey400); font-weight: 400; }
+.tl-desc { font-size: 8px; color: var(--grey500); }
+.tl-date { font-size: 8px; color: var(--accent); margin-top: 2px; }
+.tl-current-tag {
+  font-size: 7px; padding: 2px 7px;
+  background: var(--progress-bg); color: var(--progress);
+  border-radius: 6px; display: inline-block; margin-top: 3px;
+}
+
+/* ─── Screen: Map ─────────────────────────────────────────────────── */
+.screen-map {
+  position: relative; min-height: 360px;
+  background: #e8f0e9;
+  overflow: hidden;
+}
+.map-bg {
+  position: absolute; inset: 0;
+  background: 
+    linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px),
+    linear-gradient(135deg, #c8dfc9 0%, #b8d4bc 50%, #a8c4ac 100%);
+  background-size: 18px 18px, 18px 18px, 100% 100%;
+}
+.map-road-h {
+  position: absolute; background: rgba(255,255,255,0.8);
+  height: 10px; left: 0; right: 0;
+}
+.map-road-v {
+  position: absolute; background: rgba(255,255,255,0.8);
+  width: 10px; top: 0; bottom: 0;
+}
+.map-marker {
+  position: absolute;
+  display: flex; flex-direction: column; align-items: center;
+  cursor: pointer;
+}
+.map-marker .dot {
+  width: 18px; height: 18px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.map-marker .dot::after {
+  content: '';
+  width: 8px; height: 8px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 50%;
+}
+.map-marker.red .dot { background: #e53935; }
+.map-marker.blue .dot { background: #1565C0; }
+.map-marker.green .dot { background: #2E7D32; }
+.map-marker.orange .dot { background: #FF8F00; }
+.map-topbar {
+  position: absolute; top: 8px; left: 8px; right: 8px;
+  background: #fff; border-radius: 10px;
+  padding: 8px 10px;
+  display: flex; align-items: center; gap: 6px;
+  box-shadow: var(--shadow);
+}
+.map-topbar span { font-size: 10px; font-weight: 600; color: var(--grey800); }
+.map-filters {
+  position: absolute; top: 44px; left: 8px; right: 8px;
+  display: flex; gap: 5px;
+  overflow: hidden;
+}
+.map-chip {
+  font-size: 8px; padding: 4px 8px;
+  border-radius: 10px; font-weight: 600; white-space: nowrap;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+.map-chip.active { background: var(--primary); color: #fff; }
+.map-chip.white { background: #fff; color: var(--grey700); }
+.map-legend {
+  position: absolute; bottom: 50px; left: 8px;
+  background: #fff; border-radius: 8px;
+  padding: 8px 10px;
+  box-shadow: var(--shadow);
+}
+.legend-item {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 8px; color: var(--grey600); margin-bottom: 4px;
+}
+.legend-item:last-child { margin-bottom: 0; }
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* ─── Screen: Profile ─────────────────────────────────────────────── */
+.screen-profile {
+  display: flex; flex-direction: column;
+  min-height: 360px; background: var(--grey50);
+}
+.profile-header {
+  background: var(--primary);
+  padding: 16px 14px;
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+}
+.profile-avatar {
+  width: 50px; height: 50px; border-radius: 50%;
+  background: var(--accent-light);
+  border: 2px solid var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; position: relative;
+}
+.avatar-edit {
+  position: absolute; bottom: 0; right: 0;
+  width: 14px; height: 14px;
+  background: var(--accent); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 7px; color: #fff;
+  border: 1px solid #fff;
+}
+.profile-name { color: #fff; font-size: 13px; font-weight: 700; }
+.profile-since { color: var(--muted-dark); font-size: 9px; }
+.profile-badges { display: flex; gap: 5px; }
+.profile-badge {
+  font-size: 8px; padding: 3px 8px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.12); color: #fff;
+}
+.points-card {
+  margin: 10px; background: var(--primary);
+  border-radius: 12px; padding: 12px 14px;
+}
+.points-row { display: flex; align-items: flex-start; justify-content: space-between; }
+.points-num { font-size: 24px; font-weight: 800; color: var(--accent); }
+.points-lbl { font-size: 8px; color: var(--muted-dark); }
+.points-bar-bg {
+  background: rgba(255,255,255,0.15);
+  height: 5px; border-radius: 3px; margin: 8px 0 4px;
+}
+.points-bar { height: 100%; background: var(--accent); border-radius: 3px; width: 65%; }
+.points-next { font-size: 8px; color: var(--muted-dark); }
+.menu-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 14px;
+  background: #fff;
+  border-bottom: 0.5px solid var(--grey100);
+}
+.menu-icon {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; flex-shrink: 0;
+}
+.menu-label { font-size: 11px; font-weight: 500; flex: 1; }
+.menu-arrow { font-size: 10px; color: var(--grey400); }
+
+/* ─── Screen: Admin Dashboard ─────────────────────────────────────── */
+.screen-admin {
+  display: flex; flex-direction: column;
+  min-height: 360px; background: var(--grey50);
+}
+.admin-appbar {
+  background: var(--primary); padding: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.admin-appbar .title { color: #fff; font-size: 11px; font-weight: 700; flex: 1; }
+.admin-stats-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 6px; padding: 10px;
+}
+.admin-stat {
+  padding: 10px; border-radius: 10px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.admin-stat .icon { font-size: 18px; }
+.admin-stat .num { font-size: 20px; font-weight: 800; }
+.admin-stat .lbl { font-size: 8px; color: var(--grey600); }
+.action-row { display: flex; gap: 8px; padding: 0 10px 8px; }
+.action-btn {
+  flex: 1; border-radius: 10px; padding: 10px 6px;
+  text-align: center; cursor: pointer;
+}
+.action-btn .action-icon { font-size: 18px; }
+.action-btn .action-lbl { font-size: 9px; color: #fff; margin-top: 3px; font-weight: 600; }
+.admin-report-row {
+  margin: 0 10px 6px;
+  background: #fff; border-radius: 10px;
+  border: 0.5px solid var(--border);
+  padding: 8px 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+.admin-report-img {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: var(--accent-light);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.admin-report-title { font-size: 10px; font-weight: 600; }
+.admin-report-addr { font-size: 8px; color: var(--grey500); }
+
+/* ─── Screen: Notifications ───────────────────────────────────────── */
+.screen-notif {
+  display: flex; flex-direction: column;
+  min-height: 360px; background: #fff;
+}
+.notif-item {
+  display: flex; gap: 10px;
+  padding: 10px 12px;
+  border-bottom: 0.5px solid var(--grey100);
+}
+.notif-item.unread { background: var(--accent-soft); }
+.notif-icon {
+  width: 34px; height: 34px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; flex-shrink: 0;
+}
+.notif-title { font-size: 10px; font-weight: 600; }
+.notif-body { font-size: 9px; color: var(--grey600); }
+.notif-time { font-size: 8px; color: var(--grey400); }
+.notif-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent); margin-top: 4px; flex-shrink: 0;
+}
+
+/* ─── Screen: Leaderboard ─────────────────────────────────────────── */
+.screen-leader {
+  display: flex; flex-direction: column;
+  min-height: 360px; background: var(--grey50);
+}
+.leader-top {
+  background: var(--primary); padding: 12px 12px 0;
+}
+.podium { display: flex; align-items: flex-end; justify-content: center; gap: 6px; padding-bottom: 0; }
+.podium-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.podium-medal { font-size: 16px; }
+.podium-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--accent-light);
+  border: 1.5px solid var(--accent);
+  display: flex; align-items: center; justify-content: center; font-size: 14px;
+}
+.podium-name { font-size: 8px; color: #fff; }
+.podium-pts { font-size: 7px; color: var(--muted-dark); }
+.podium-bar {
+  background: rgba(255,255,255,0.12); border-radius: 4px 4px 0 0;
+  display: flex; align-items: center; justify-content: center;
+  width: 40px; font-size: 9px; color: #fff; font-weight: 700;
+}
+.leader-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 12px;
+  background: #fff; border-bottom: 0.5px solid var(--grey100);
+}
+.leader-rank { font-size: 10px; font-weight: 700; color: var(--grey500); width: 18px; }
+.leader-avatar {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--accent-light);
+  display: flex; align-items: center; justify-content: center; font-size: 13px;
+}
+.leader-name { font-size: 10px; font-weight: 600; flex: 1; }
+.leader-pts { font-size: 10px; font-weight: 700; color: var(--primary); }
+
+/* ─── Screen: Rewards ─────────────────────────────────────────────── */
+.screen-rewards {
+  display: flex; flex-direction: column;
+  min-height: 360px; background: #fff;
+}
+.rewards-balance {
+  background: var(--primary); padding: 12px 14px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.rewards-pts { font-size: 26px; font-weight: 800; color: var(--accent); }
+.rewards-lbl { font-size: 8px; color: var(--muted-dark); }
+.rewards-trophy {
+  width: 44px; height: 44px;
+  background: rgba(255,255,255,0.12); border-radius: 12px;
+  display: flex; align-items: center; justify-content: center; font-size: 22px;
+}
+.rewards-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 8px; padding: 10px;
+}
+.reward-card {
+  background: var(--grey50); border-radius: 10px;
+  border: 0.5px solid var(--border); overflow: hidden;
+}
+.reward-icon-area {
+  height: 50px; display: flex; align-items: center; justify-content: center;
+  background: var(--accent-soft); font-size: 26px;
+}
+.reward-body { padding: 7px 8px 8px; }
+.reward-title { font-size: 9px; font-weight: 700; }
+.reward-desc { font-size: 8px; color: var(--grey500); margin-bottom: 6px; }
+.reward-row { display: flex; align-items: center; gap: 4px; }
+.reward-cost {
+  font-size: 8px; padding: 2px 6px;
+  border-radius: 5px; font-weight: 600; flex: 1;
+}
+.redeem-btn {
+  font-size: 8px; padding: 3px 8px;
+  background: var(--primary); color: #fff;
+  border-radius: 6px; font-family: 'Cairo', sans-serif;
+  border: none; cursor: pointer;
+}
+
+/* ─── Screen: Stats ───────────────────────────────────────────────── */
+.screen-stats {
+  display: flex; flex-direction: column;
+  min-height: 360px; background: var(--grey50);
+}
+.stats-overview-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 6px; padding: 10px;
+}
+.stats-card {
+  border-radius: 10px; padding: 10px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.stats-card .icon { font-size: 18px; }
+.stats-card .val { font-size: 20px; font-weight: 800; }
+.stats-card .lbl { font-size: 8px; color: var(--grey600); }
+.achievement-row {
+  display: flex; gap: 6px; padding: 0 10px;
+  overflow: hidden;
+}
+.achievement {
+  flex: 1; border-radius: 10px; padding: 8px 4px;
+  text-align: center;
+  border: 0.5px solid var(--border);
+  background: #fff;
+}
+.achievement.earned { background: var(--accent-soft); border-color: var(--accent); }
+.achievement .ach-icon { font-size: 18px; }
+.achievement .ach-lbl { font-size: 7px; color: var(--grey500); margin-top: 3px; }
+.achievement.earned .ach-lbl { color: var(--done); }
+
+/* ─── Architecture diagram ────────────────────────────────────────── */
+.arch-diagram {
+  display: flex; gap: 20px; align-items: flex-start;
+  flex-wrap: wrap;
+}
+.arch-layer {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  flex: 1; min-width: 180px;
+}
+.arch-layer-title {
+  font-size: 11px; font-weight: 700;
+  color: var(--grey500); margin-bottom: 12px;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.arch-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 10px; border-radius: 8px;
+  background: var(--grey50); margin-bottom: 5px;
+  font-size: 11px; font-weight: 500;
+}
+.arch-item .dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+
+/* ─── Flow diagram ────────────────────────────────────────────────── */
+.flow {
+  display: flex; align-items: center; gap: 6px;
+  flex-wrap: wrap;
+}
+.flow-box {
+  background: #fff; border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px 14px;
+  font-size: 11px; font-weight: 600; text-align: center;
+  min-width: 100px;
+}
+.flow-box.primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+.flow-box.accent { background: var(--accent); color: #fff; border-color: var(--accent); }
+.flow-box.firebase { background: #ff6d00; color: #fff; border-color: #ff6d00; }
+.flow-arrow { color: var(--grey400); font-size: 18px; }
+
+/* ─── Setup panel ─────────────────────────────────────────────────── */
+.setup-panels { display: flex; flex-direction: column; gap: 16px; }
+.setup-panel {
+  background: #fff; border: 1px solid var(--border);
+  border-radius: 14px; overflow: hidden;
+}
+.setup-panel-header {
+  padding: 14px 16px;
+  background: var(--grey50);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px;
+}
+.setup-panel-header .step-num {
+  width: 28px; height: 28px; font-size: 12px;
+}
+.setup-panel-header h3 { font-size: 13px; font-weight: 700; flex: 1; }
+.setup-panel-header .badge {
+  font-size: 10px; padding: 3px 10px;
+  border-radius: 10px; font-weight: 600;
+}
+.badge.required { background: var(--high-bg); color: var(--high); }
+.badge.optional { background: var(--done-bg); color: var(--done); }
+.setup-panel-body { padding: 16px; }
+.setup-panel-body p { font-size: 12px; color: var(--grey700); line-height: 1.8; margin-bottom: 10px; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+.info-item { background: var(--grey50); border-radius: 8px; padding: 10px; }
+.info-item .lbl { font-size: 9px; color: var(--grey500); margin-bottom: 3px; }
+.info-item .val { font-size: 11px; font-weight: 600; }
+
+/* ─── Tabs ────────────────────────────────────────────────────────── */
+.tab-nav {
+  display: flex; gap: 4px;
+  background: var(--grey100);
+  border-radius: 12px; padding: 4px;
+  margin-bottom: 24px;
+}
+.tab-btn {
+  flex: 1; padding: 8px; border: none;
+  background: transparent; cursor: pointer;
+  border-radius: 9px; font-size: 12px; font-weight: 600;
+  font-family: 'Cairo', sans-serif; color: var(--grey600);
+  transition: all 0.15s;
+}
+.tab-btn.active { background: #fff; color: var(--primary); box-shadow: var(--shadow); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* ─── Misc ────────────────────────────────────────────────────────── */
+.divider { height: 1px; background: var(--border); margin: 32px 0; }
+.badge-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 10px; padding: 4px 10px;
+  border-radius: 20px; font-weight: 600;
+}
+.badge-pill.primary { background: var(--accent-light); color: var(--done); }
+.badge-pill.blue { background: var(--progress-bg); color: var(--progress); }
+.badge-pill.orange { background: var(--pending-bg); color: var(--pending); }
+.badge-pill.red { background: var(--high-bg); color: var(--high); }
+.section-tag {
+  display: inline-block; font-size: 10px; font-weight: 700;
+  padding: 4px 12px; border-radius: 20px;
+  background: var(--accent); color: #fff;
+  margin-bottom: 16px;
+}
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media(max-width:800px) {
+  .sidebar { display: none; }
+  .main { margin-right: 0; }
+  .two-col { grid-template-columns: 1fr; }
+  .screens-grid { grid-template-columns: repeat(2, 1fr); }
+  .files-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- SIDEBAR -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<nav class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <div class="icon">🛣️</div>
+      <div>
+        <span>بلدي</span>
+        <small>توثيق المشروع الكامل</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-section-label">نظرة عامة</div>
+  <a href="#overview" class="nav-item active"><div class="nav-dot"></div>مقدمة المشروع</a>
+  <a href="#architecture" class="nav-item"><div class="nav-dot"></div>هيكل المشروع</a>
+  <a href="#screens" class="nav-item"><div class="nav-dot"></div>جميع الواجهات</a>
+
+  <div class="nav-section-label">الملفات</div>
+  <a href="#core-files" class="nav-item"><div class="nav-dot"></div>ملفات Core</a>
+  <a href="#auth-files" class="nav-item"><div class="nav-dot"></div>Auth</a>
+  <a href="#report-files" class="nav-item"><div class="nav-dot"></div>Report</a>
+  <a href="#admin-files" class="nav-item"><div class="nav-dot"></div>Admin</a>
+  <a href="#other-files" class="nav-item"><div class="nav-dot"></div>Profile / Notif / Map</a>
+
+  <div class="nav-section-label">Firebase</div>
+  <a href="#firebase-setup" class="nav-item"><div class="nav-dot"></div>ربط Firebase خطوة بخطوة</a>
+  <a href="#firebase-rules" class="nav-item"><div class="nav-dot"></div>Security Rules</a>
+  <a href="#firebase-functions" class="nav-item"><div class="nav-dot"></div>Cloud Functions</a>
+  <a href="#firebase-flow" class="nav-item"><div class="nav-dot"></div>كيف يشتغل Realtime</a>
+
+  <div class="nav-section-label">تشغيل المشروع</div>
+  <a href="#run" class="nav-item"><div class="nav-dot"></div>خطوات التشغيل</a>
+  <a href="#dependencies" class="nav-item"><div class="nav-dot"></div>الحزم والمكتبات</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- MAIN -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<main class="main">
+
+<!-- ─── HERO ─────────────────────────────────────────────────────────── -->
+<section id="overview" class="section-hero">
+  <div class="hero-badge">🛣️ Flutter + Firebase + GetX</div>
+  <h1>بلدي — توثيق المشروع الكامل</h1>
+  <p>تطبيق الإبلاغ عن الحفر والطرق — شرح كل ملف، كل شاشة، وكيفية ربط Firebase خطوة بخطوة.</p>
+  <div class="stats-row">
+    <div class="stat-pill"><div class="num">51</div><div class="lbl">ملف Dart</div></div>
+    <div class="stat-pill"><div class="num">20+</div><div class="lbl">شاشة</div></div>
+    <div class="stat-pill"><div class="num">8</div><div class="lbl">Controllers</div></div>
+    <div class="stat-pill"><div class="num">5</div><div class="lbl">Cloud Functions</div></div>
+    <div class="stat-pill"><div class="num">8800</div><div class="lbl">سطر كود</div></div>
+  </div>
+</section>
+
+<!-- ─── ARCHITECTURE ──────────────────────────────────────────────────── -->
+<section id="architecture" class="page-section">
+  <div class="section-tag">🏗️ هيكل المشروع</div>
+  <h2 class="section-title">Clean Architecture — Feature-First</h2>
+  <p class="section-subtitle">المشروع مقسّم بأسلوب Feature-First يعني كل ميزة عندها مجلدها الخاص بـ Model + Controller + View. هذا يجعل الكود سهل القراءة والتوسّع.</p>
+
+  <div class="arch-diagram">
+    <div class="arch-layer">
+      <div class="arch-layer-title">📦 core</div>
+      <div class="arch-item"><div class="dot" style="background:#3AC47D"></div>theme/</div>
+      <div class="arch-item"><div class="dot" style="background:#185FA5"></div>constants/</div>
+      <div class="arch-item"><div class="dot" style="background:#854F0B"></div>helpers/</div>
+      <div class="arch-item"><div class="dot" style="background:#A32D2D"></div>services/</div>
+      <div class="arch-item"><div class="dot" style="background:#6C757D"></div>utils/</div>
+    </div>
+    <div class="arch-layer">
+      <div class="arch-layer-title">🎯 features</div>
+      <div class="arch-item"><div class="dot" style="background:#1B3A2D"></div>auth/</div>
+      <div class="arch-item"><div class="dot" style="background:#3AC47D"></div>home/</div>
+      <div class="arch-item"><div class="dot" style="background:#185FA5"></div>report/</div>
+      <div class="arch-item"><div class="dot" style="background:#854F0B"></div>map/</div>
+      <div class="arch-item"><div class="dot" style="background:#A32D2D"></div>profile/</div>
+      <div class="arch-item"><div class="dot" style="background:#6C757D"></div>admin/</div>
+      <div class="arch-item"><div class="dot" style="background:#FFB300"></div>rewards/</div>
+      <div class="arch-item"><div class="dot" style="background:#8e24aa"></div>notifications/</div>
+    </div>
+    <div class="arch-layer">
+      <div class="arch-layer-title">🔧 كل feature تحتوي</div>
+      <div class="arch-item"><div class="dot" style="background:#3AC47D"></div>models/ ← البيانات</div>
+      <div class="arch-item"><div class="dot" style="background:#185FA5"></div>controllers/ ← المنطق</div>
+      <div class="arch-item"><div class="dot" style="background:#1B3A2D"></div>views/ ← الواجهة</div>
+      <div class="arch-item"><div class="dot" style="background:#854F0B"></div>widgets/ ← مكونات</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SCREENS ───────────────────────────────────────────────────────── -->
+<section id="screens" class="page-section">
+  <div class="section-tag">📱 الواجهات</div>
+  <h2 class="section-title">كل شاشات التطبيق</h2>
+  <p class="section-subtitle">تصميم كامل بنفس ألوان وأحجام التطبيق الحقيقي</p>
+
+  <div class="screens-grid">
+
+    <!-- Splash -->
+    <div class="phone-wrapper">
+      <div class="phone"><div class="phone-screen">
+        <div class="screen-splash">
+          <div class="splash-icon">🛣️</div>
+          <div class="splash-title">بلدي</div>
+          <div class="splash-sub">الإبلاغ عن الحفر والطرق</div>
+          <div class="splash-dots">
+            <span></span><span style="background:rgba(255,255,255,0.3)"></span><span style="background:rgba(255,255,255,0.3)"></span>
+          </div>
+        </div>
+      </div></div>
+      <div class="phone-label">💫 Splash Screen</div>
+    </div>
+
+    <!-- Onboarding -->
+    <div class="phone-wrapper">
+      <div class="phone"><div class="phone-screen">
+        <div class="screen-onboarding">
+          <div class="ob-skip">تخطي</div>
+          <div class="ob-emoji-box">📸</div>
+          <div class="ob-title">صوّر الحفرة</div>
+          <div class="ob-desc">التقط صورة للحفرة والموقع يتحدد تلقائياً عبر GPS بدقة عالية</div>
+          <div class="ob-dots">
+            <span class="active"></span><span></span><span></span>
+          </div>
+          <button class="ob-btn">التالي →</button>
+        </div>
+      </div></div>
+      <div class="phone-label">🎯 Onboarding (3 شرائح)</div>
+    </div>
+
+    <!-- Login -->
+    <div class="phone-wrapper">
+      <div class="phone"><div class="phone-screen">
+        <div class="screen-login">
+          <div class="login-top">
+            <div class="login-top-icon">🛣️</div>
+            <h2>بلدي</h2>
+            <p>الإبلاغ عن الحفر والطرق</p>
+          </div>
+          <div class="login-card">
+            <div style="font-size:13px;font-weight:700;margin-bottom:2px">تسجيل الدخول</div>
+            <div style="font-size:9px;color:#6C757D;margin-bottom:10px">أدخل بياناتك للمتابعة</div>
+            <div class="form-label">📱 رقم الجوال</div>
+            <input class="form-input" placeholder="05X XXX XXXX" />
+            <div class="form-label">🔒 كلمة المرور</div>
+            <input class="form-input" type="password" placeholder="••••••••" />
+            <button class="login-btn">تسجيل الدخول</button>
+            <div class="login-link">ليس لديك حساب؟ <a href="#">إنشاء حساب</a></div>
+          </div>
+        </div>
+      </div></div>
+      <div class="phone-label">🔐 Login Screen</div>
+    </div>
+
+    <!-- Home Feed -->
+    <div class="phone-wrapper">
+      <div class="phone"><div class="phone-screen">
+        <div class="screen-home">
+          <div class="home-topbar">
+            <div class="home-topbar-row">
+              <div class="home-greeting">مرحباً، محمد 👋</div>
+              <div class="home-notif-btn">🔔<div class="home-notif-badge"></div></div>
+            </div>
+            <div class="home-search">
+              <span>🔍</span>
+              <span>ابحث عن بلاغ أو موقع...</span>
+            </div>
+          </div>
+          <div class="stats-row-home">
+            <div class="stat-card-home" style="background:#EAF3DE">
+              <div class="num" style="color:#3B6D11">24</div>
+              <div class="lbl">تم الإصلاح</div>
+            </div>
+            <div class="stat-card-home" style="background:#E6F1FB">
+              <div class="num" style="color:#185FA5">8</div>
+              <div class="lbl">جاري</div>
+            </div>
+            <div class="stat-card-home" style="background:#FAEEDA">
+              <div class="num" style="color:#854F0B">5</div>
+              <div class="lbl">جديدة</div>
+            </div>
+          </div>
+          <div class="feed-label">📋 آخر البلاغات</div>
+          <div class="report-card-mini">
+            <div class="report-img-mini">🛣️
+              <div class="severity-chip" style="background:#FCEBEB;color:#A32D2D">🔴 عالية</div>
+            </div>
+            <div class="report-card-mini-body">
+              <div class="report-title-mini">حفرة شارع النزهة</div>
+              <div class="report-addr-mini">📍 حي النزهة، الرياض</div>
+              <div class="report-meta-row">
+                <div class="vote-btn-mini">👍 12 تأكيد</div>
+                <div class="status-badge-mini" style="background:#E6F1FB;color:#185FA5">🔄 جاري الإصلاح</div>
+              </div>
+            </div>
+          </div>
+          <div class="report-card-mini">
+            <div class="report-img-mini" style="background:linear-gradient(135deg,#EAF3DE,#c8dfc9)">🛣️
+              <div class="severity-chip" style="background:#EAF3DE;color:#3B6D11">🟢 منخفضة</div>
+            </div>
+            <div class="report-card-mini-body">
+              <div class="report-title-mini">تشقق في الرصيف</div>
+              <div class="report-addr-mini">📍 شارع التحلية</div>
+              <div class="report-meta-row">
+                <div class="vote-btn-mini">👍 3 تأكيد</div>
+                <div class="status-badge-mini" style="background:#EAF3DE;color:#3B6D11">✅ تم الإصلاح</div>
+              </div>
+            </div>
+          </div>
+          <div class="home-bottom-nav">
+            <div class="nav-tab active"><div class="icon">🏠</div><span>الرئيسية</span><div class="dot"></div></div>
+            <div class="nav-tab"><div class="icon">🗺️</div><span>الخريطة</span></div>
+            <div class="nav-fab">+</div>
+            <div class="nav-tab"><div class="icon">📋</div><span>بلاغاتي</span></div>
+            <div class="nav-tab"><div class="icon">👤</div><span>حسابي</span></div>
+          </div>
+        </div>
+      </div></div>
+      <div class="phone-label">🏠 Home Screen</div>
+    </div>
+
+    <!-- Add Report -->
+    <div class="phone-wrapper">
+      <div class="phone"><div class="phone-screen">
+        <div class="screen-add">
+          <div class="add-appbar">
+            <div class="add-close">✕</div>
+            <span>بلاغ جديد</span>
+          </div>
+          <div class="add-body">
+            <div class="add-section-label">📸 صورة الحفرة *</div>
+            <div class="add-img-box">📷<span>اضغط للتصوير أو الاختيار</span></div>
+            <div class="add-section-label">📍 الموقع *</div>
+            <div class="add-location">
+              <div class="addr">📍 حي النزهة، الرياض</div>
+              <button class="add-location .gps-btn" style="background:#1B3A2D;color:#fff;font-size:8px;padding:4px 8px;border-radius:6px;border:none;">تحديد</button>
+            </div>
+            <div class="add-section-label">⚠️ درجة الخطورة *</div>
+            <div class="severity-row">
+              <div class="sev-opt active-low">🟢<span class="sev-lbl" style="color:#3B6D11">منخفضة</span></div>
+              <div class="sev-opt active-med">🟡<span class="sev-lbl" style="color:#B47A0B">متوسطة</span></div>
+              <div class="sev-opt" style="border-color:var(--border)">🔴<span class="sev-lbl" style="color:#6C757D">عالية</span></div>
+            </div>
+            <div class="add-section-label">📝 وصف مختصر</div>
+            <input class="form-input" placeholder="حفرة كبيرة في شارع النزهة..." style="width:100%"/>
+            <button class="add-submit">📤 إرسال البلاغ للبلدية</button>
+          </div>
+        </div>
+      </div></div>
+      <div class="phone-label">➕ Add Report Screen</div>
+    </div>
+
+    <!-- Tracking -->
+    <div class="phone-wrapper">
+      <div class="phone"><div class="phone-screen">
+        <div class="screen-track">
+          <div class="track-header" style="display:flex;align-items:center;gap:8px;padding:10px 12px">
+            <span style="color:#fff;font-size:14px">←</span>
+            <span style="color:#fff;font-size:11px;font-weight:700">تتبع البلاغ</span>
+          </div>
+          <div class="track-card">
+            <span style="font-size:22px">🛣️</span>
+            <div>
+              <div class="track-title">حفرة شارع النزهة</div>
+              <div class="track-addr">📍 حي النزهة، الرياض</div>
+            </div>
+            <div class="status-badge-mini" style="background:rgba(255,255,255,0.15);color:#fff;border-radius:8px;padding:3px 7px">🔄 جاري</div>
+          </div>
+          <div class="track-body">
+            <div style="font-size:10px;font-weight:700;margin-bottom:12px">مراحل البلاغ</div>
+            <div class="tl-item done">
+              <div class="tl-dot done">✓</div>
+              <div class="tl-content">
+                <div class="tl-title">تم استلام البلاغ</div>
+                <div class="tl-date">12/3/2025</div>
+              </div>
+            </div>
+            <div class="tl-item done">
+              <div class="tl-dot done">✓</div>
+              <div class="tl-content">
+                <div class="tl-title">قيد المراجعة</div>
+                <div class="tl-date">13/3/2025</div>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot current">●</div>
+              <div class="tl-content">
+                <div class="tl-title">جاري الإصلاح</div>
+                <div class="tl-desc">تم تكليف فريق الصيانة ب</div>
+                <div class="tl-current-tag">المرحلة الحالية</div>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot" style="background:var(--grey200)">○</div>
+              <div class="tl-content">
+                <div class="tl-title inactive">تم الإصلاح</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div></div>
+      <div class="phone-label">📍 Report Tracking</div>
+    </div>
+
+    <!-- Map -->
+    <div class="phone-wrapper">
+      <div class="phone"><div class="phone-screen">
+        <div class="screen-map">
+          <div class="map-bg"></div>
+          <div class="map-road-h" style="top:40%"></div>
+          <div class="map-road-h" style="top:65%"></div>
+          <div class="map-road-v" style="right:35%"></div>
+          <div class="map-road-v" style="right:65%"></div>
+          <div class="map-marker red" style="top:38%;right:60%"><div class="dot"></div></div>
+          <div class="map-marker blue" style="top:55%;right:40%"><div class="dot"></div></div>
+          <div class="map-marker green" style="top:30%;right:30%"><div class="dot"></div></div>
+          <div class="map-marker orange" style="top:62%;right:68%"><div class="dot"></div></div>
+          <div class="map-topbar">
+            <span>🗺️</span><span>خريطة البلاغات</span>
+          </div>
+          <div class="map-filters">
+            <div class="map-chip active">الكل</div>
+            <div class="map-chip white">🆕 جديدة</div>
+            <div class="map-chip white">🔄 جاري</div>
+            <div class="map-chip white">✅ تم</div>
+          </div>
+          <div class="map-legend" style="font-size:8px">
+            <div class="legend-item"><div class="legend-dot" style="background:#e53935"></div>عالية</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#FF8F00"></div>جديدة</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#1565C0"></div>جاري</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#2E7D32"></div>تم</div>
+          </div>
+          <div class="home-bottom-nav" style="position:absolute;bottom:0;left:0;right:0">
+            <div class="nav-tab"><div class="icon">🏠</div><span style="font-size:7px">الرئيسية</span></div>
+            <div class="nav-tab active"><div class="icon">🗺️</div><span style="font-size:7px">الخريطة</span><div class="dot"></div></div>
+            <div class="nav-fab" style="width:36px;height:36px;font-size:18px;margin-top:-14px">+</div>
+            <div class="nav-tab"><div class="icon">📋</div><span style="font-size:7px">بلاغاتي</span></div>
+            <div class="nav-tab"><div class="icon">👤</div><span style="font-size:7px">حسابي</span></div>
+          </div>
+        </div>
+      </div></div>
+      <div class="phone-label">🗺️ Map Screen (Google Maps)</div>
+    </div>
+
+    <!-- Profile -->
+    <div class="phone-wrapper">
+      <div class="phone"><div class="phone-screen">
+        <div class="screen-profile">
+          <div class="profile-header">
+            <div class="profile-avatar">👤<div class="avatar-edit">✎</div></div>
+            <div class="profile-name">محمد أحمد السالم</div>
+            <div class="profile-since">عضو منذ 2024</div>
+            <div class="profile-badges">
+              <div class="profile-badge">🏅 مبلّغ نشيط</div>
+              <div class="profile-badge">⭐ ذهبية</div>
+            </div>
+          </div>
+          <div class="points-card">
+            <div class="points-row">
+              <div>
+                <div class="points-lbl">نقاط المكافآت</div>
+                <div class="points-num">1,240</div>
+              </div>
+              <div style="background:rgba(255,255,255,0.12);padding:6px 10px;border-radius:8px;font-size:8px;color:#fff">استبدل</div>
+            </div>
+            <div class="points-bar-bg"><div class="points-bar"></div></div>
+            <div class="points-next">260 نقطة للمستوى الذهبي</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-icon" style="background:#EAF3DE">📊</div>
+            <div class="menu-label">إحصائياتي</div>
+            <div class="menu-arrow">‹</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-icon" style="background:#E6F1FB">🔔</div>
+            <div class="menu-label">الإشعارات</div>
+            <div class="menu-arrow">‹</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-icon" style="background:#FAEEDA">🏆</div>
+            <div class="menu-label">المتصدرون</div>
+            <div class="menu-arrow">‹</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-icon" style="background:#EAF3DE">🎁</div>
+            <div class="menu-label">استبدال النقاط</div>
+            <div class="menu-arrow">‹</div>
+          </div>
+        </div>
+      </div></div>
+      <div class="phone-label">👤 Profile Screen</div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div class="phone-wrapper">
+      <div class="phone"><div class="phone-screen">
+        <div class="screen-admin">
+          <div class="admin-appbar">
+            <span style="font-size:16px">🏛️</span>
+            <div class="title">لوحة البلدية</div>
+            <span style="font-size:16px;color:#fff">🔔</span>
+          </div>
+          <div style="font-size:9px;font-weight:700;padding:8px 10px 0;color:#495057">نظرة عامة</div>
+          <div class="admin-stats-grid">
+            <div class="admin-stat" style="background:#EAF3DE">
+              <div class="icon">✅</div>
+              <div class="num" style="color:#3B6D11">24</div>
+              <div class="lbl">تم الإصلاح</div>
+            </div>
+            <div class="admin-stat" style="background:#E6F1FB">
+              <div class="icon">🔄</div>
+              <div class="num" style="color:#185FA5">8</div>
+              <div class="lbl">جاري الإصلاح</div>
+            </div>
+            <div class="admin-stat" style="background:#FAEEDA">
+              <div class="icon">⏳</div>
+              <div class="num" style="color:#854F0B">12</div>
+              <div class="lbl">بانتظار</div>
+            </div>
+            <div class="admin-stat" style="background:var(--grey100)">
+              <div class="icon">📋</div>
+              <div class="num" style="color:#1B3A2D">47</div>
+              <div class="lbl">إجمالي</div>
+            </div>
+          </div>
+          <div class="action-row">
+            <div class="action-btn" style="background:#1B3A2D">
+              <div class="action-icon">📋</div>
+              <div class="action-lbl">إدارة البلاغات</div>
+            </div>
+            <div class="action-btn" style="background:#185FA5">
+              <div class="action-icon">👷</div>
+              <div class="action-lbl">فرق العمل</div>
+            </div>
+          </div>
+          <div style="font-size:9px;font-weight:700;padding:4px 10px;color:#495057">آخر البلاغات</div>
+          <div class="admin-report-row">
+            <div class="admin-report-img">🛣️</div>
+            <div style="flex:1">
+              <div class="admin-report-title">حفرة شارع النزهة</div>
+              <div class="admin-report-addr">📍 حي النزهة</div>
+            </div>
+            <div class="status-badge-mini" style="background:#FCEBEB;color:#A32D2D">🔴 عالية</div>
+          </div>
+          <div class="admin-report-row">
+            <div class="admin-report-img">🛣️</div>
+            <div style="flex:1">
+              <div class="admin-report-title">تشقق في الرصيف</div>
+              <div class="admin-report-addr">📍 التحلية</div>
+            </div>
+            <div class="status-badge-mini" style="background:#EAF3DE;color:#3B6D11">✅ تم</div>
+          </div>
+        </div>
+      </div></div>
+      <div class="phone-label">🏛️ Admin Dashboard</div>
+    </div>
+
+    <!-- Notifications -->
+    <div class="phone-wrapper">
+      <div class="phone"><div class="phone-screen">
+        <div class="screen-notif">
+          <div style="background:var(--primary);padding:12px;display:flex;align-items:center;gap:8px">
+            <span style="color:#fff;font-size:11px;font-weight:700;flex:1">الإشعارات</span>
+            <span style="color:rgba(255,255,255,0.7);font-size:9px">قراءة الكل</span>
+          </div>
+          <div class="notif-item unread">
+            <div class="notif-icon" style="background:var(--accent-light)">🔄</div>
+            <div style="flex:1">
+              <div class="notif-title">تحديث البلاغ</div>
+              <div class="notif-body">تغيّرت حالة بلاغك إلى: جاري الإصلاح</div>
+              <div class="notif-time">منذ 5 دقائق</div>
+            </div>
+            <div class="notif-dot"></div>
+          </div>
+          <div class="notif-item unread">
+            <div class="notif-icon" style="background:#FAEEDA">🎉</div>
+            <div style="flex:1">
+              <div class="notif-title">+10 نقطة!</div>
+              <div class="notif-body">إرسال بلاغ جديد</div>
+              <div class="notif-time">منذ ساعة</div>
+            </div>
+            <div class="notif-dot"></div>
+          </div>
+          <div class="notif-item">
+            <div class="notif-icon" style="background:var(--grey100)">✅</div>
+            <div style="flex:1">
+              <div class="notif-title">تحديث البلاغ</div>
+              <div class="notif-body">تغيّرت الحالة إلى: تم الإصلاح ✅</div>
+              <div class="notif-time">أمس</div>
+            </div>
+          </div>
+          <div class="notif-item">
+            <div class="notif-icon" style="background:var(--grey100)">👍</div>
+            <div style="flex:1">
+              <div class="notif-title">تأكيد البلاغ</div>
+              <div class="notif-body">أكّد 5 مستخدمين بلاغك</div>
+              <div class="notif-time">منذ يومين</div>
+            </div>
+          </div>
+        </div>
+      </div></div>
+      <div class="phone-label">🔔 Notifications</div>
+    </div>
+
+    <!-- Leaderboard -->
+    <div class="phone-wrapper">
+      <div class="phone"><div class="phone-screen">
+        <div class="screen-leader">
+          <div class="leader-top">
+            <div style="color:#fff;font-size:11px;font-weight:700;padding-bottom:8px">🏆 المتصدرون</div>
+            <div class="podium">
+              <div class="podium-item">
+                <div class="podium-medal">🥈</div>
+                <div class="podium-avatar">👤</div>
+                <div class="podium-name">سارة</div>
+                <div class="podium-pts">890 نقطة</div>
+                <div class="podium-bar" style="height:50px">#2</div>
+              </div>
+              <div class="podium-item">
+                <div class="podium-medal">🥇</div>
+                <div class="podium-avatar" style="width:40px;height:40px;font-size:18px">👤</div>
+                <div class="podium-name">محمد</div>
+                <div class="podium-pts">1,240 نقطة</div>
+                <div class="podium-bar" style="height:70px">#1</div>
+              </div>
+              <div class="podium-item">
+                <div class="podium-medal">🥉</div>
+                <div class="podium-avatar">👤</div>
+                <div class="podium-name">أحمد</div>
+                <div class="podium-pts">720 نقطة</div>
+                <div class="podium-bar" style="height:36px">#3</div>
+              </div>
+            </div>
+          </div>
+          <div class="leader-row" style="background:var(--accent-soft)">
+            <div class="leader-rank" style="color:var(--done)">#1</div>
+            <div class="leader-avatar">👤</div>
+            <div class="leader-name">محمد السالم</div>
+            <div class="leader-pts">1,240</div>
+          </div>
+          <div class="leader-row">
+            <div class="leader-rank">#2</div>
+            <div class="leader-avatar">👤</div>
+            <div class="leader-name">سارة الأحمدي</div>
+            <div class="leader-pts">890</div>
+          </div>
+          <div class="leader-row">
+            <div class="leader-rank">#3</div>
+            <div class="leader-avatar">👤</div>
+            <div class="leader-name">أحمد محمد</div>
+            <div class="leader-pts">720</div>
+          </div>
+        </div>
+      </div></div>
+      <div class="phone-label">🏆 Leaderboard</div>
+    </div>
+
+    <!-- Rewards -->
+    <div class="phone-wrapper">
+      <div class="phone"><div class="phone-screen">
+        <div class="screen-rewards">
+          <div style="background:var(--primary);padding:10px 12px;display:flex;align-items:center;gap:8px">
+            <span style="color:#fff;font-size:11px;font-weight:700;flex:1">المكافآت</span>
+          </div>
+          <div class="rewards-balance">
+            <div>
+              <div class="rewards-lbl">رصيد النقاط</div>
+              <div class="rewards-pts">1,240</div>
+            </div>
+            <div class="rewards-trophy">🏆</div>
+          </div>
+          <div style="display:flex;gap:5px;padding:8px 10px 4px;overflow:hidden">
+            <div style="font-size:8px;padding:4px 10px;background:var(--primary);color:#fff;border-radius:10px;font-weight:600">الكل</div>
+            <div style="font-size:8px;padding:4px 10px;background:var(--grey100);color:#6C757D;border-radius:10px">🎫 قسائم</div>
+            <div style="font-size:8px;padding:4px 10px;background:var(--grey100);color:#6C757D;border-radius:10px">🎁 هدايا</div>
+          </div>
+          <div class="rewards-grid">
+            <div class="reward-card">
+              <div class="reward-icon-area">☕</div>
+              <div class="reward-body">
+                <div class="reward-title">كافيه ستاربكس</div>
+                <div class="reward-desc">خصم 15% مشروب</div>
+                <div class="reward-row">
+                  <div class="reward-cost" style="background:var(--done-bg);color:var(--done)">⭐ 500</div>
+                  <button class="redeem-btn">استبدل</button>
+                </div>
+              </div>
+            </div>
+            <div class="reward-card">
+              <div class="reward-icon-area">⛽</div>
+              <div class="reward-body">
+                <div class="reward-title">خصم بنزين</div>
+                <div class="reward-desc">20 ريال وقود</div>
+                <div class="reward-row">
+                  <div class="reward-cost" style="background:var(--done-bg);color:var(--done)">⭐ 300</div>
+                  <button class="redeem-btn">استبدل</button>
+                </div>
+              </div>
+            </div>
+            <div class="reward-card">
+              <div class="reward-icon-area" style="background:var(--grey100)">📱</div>
+              <div class="reward-body">
+                <div class="reward-title">كرت شحن</div>
+                <div class="reward-desc">50 ريال أي شبكة</div>
+                <div class="reward-row">
+                  <div class="reward-cost" style="background:var(--high-bg);color:var(--high)">⭐ 1000</div>
+                  <button class="redeem-btn" style="background:var(--grey400)">🔒</button>
+                </div>
+              </div>
+            </div>
+            <div class="reward-card">
+              <div class="reward-icon-area">🛒</div>
+              <div class="reward-body">
+                <div class="reward-title">قسيمة لولو</div>
+                <div class="reward-desc">خصم 50 ريال</div>
+                <div class="reward-row">
+                  <div class="reward-cost" style="background:var(--high-bg);color:var(--high)">⭐ 800</div>
+                  <button class="redeem-btn" style="background:var(--grey400)">🔒</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div></div>
+      <div class="phone-label">🎁 Rewards Screen</div>
+    </div>
+
+    <!-- Stats -->
+    <div class="phone-wrapper">
+      <div class="phone"><div class="phone-screen">
+        <div class="screen-stats">
+          <div style="background:var(--primary);padding:12px;color:#fff;font-size:11px;font-weight:700">📊 إحصائياتي</div>
+          <div class="stats-overview-grid">
+            <div class="stats-card" style="background:var(--accent-light)">
+              <div class="icon">📋</div>
+              <div class="val" style="color:var(--primary)">24</div>
+              <div class="lbl">إجمالي البلاغات</div>
+            </div>
+            <div class="stats-card" style="background:var(--done-bg)">
+              <div class="icon">✅</div>
+              <div class="val" style="color:var(--done)">18</div>
+              <div class="lbl">تم إصلاحها</div>
+            </div>
+            <div class="stats-card" style="background:var(--pending-bg)">
+              <div class="icon">⭐</div>
+              <div class="val" style="color:#B8860B">1,240</div>
+              <div class="lbl">مجموع النقاط</div>
+            </div>
+            <div class="stats-card" style="background:var(--progress-bg)">
+              <div class="icon">🏅</div>
+              <div class="val" style="color:var(--progress);font-size:14px">ذهبية</div>
+              <div class="lbl">الدرجة</div>
+            </div>
+          </div>
+          <div style="padding:0 10px;margin-bottom:8px">
+            <div style="font-size:9px;font-weight:700;margin-bottom:6px">مستوى النشاط</div>
+            <div style="background:var(--grey200);height:8px;border-radius:4px">
+              <div style="background:var(--accent);height:100%;width:75%;border-radius:4px"></div>
+            </div>
+            <div style="font-size:8px;color:var(--grey500);margin-top:3px">260 نقطة للمستوى التالي</div>
+          </div>
+          <div style="padding:0 10px 4px;font-size:9px;font-weight:700">إنجازاتي</div>
+          <div class="achievement-row">
+            <div class="achievement earned"><div class="ach-icon">🚀</div><div class="ach-lbl">أول بلاغ</div></div>
+            <div class="achievement earned"><div class="ach-icon">🔥</div><div class="ach-lbl">5 بلاغات</div></div>
+            <div class="achievement"><div class="ach-icon" style="opacity:0.3">💎</div><div class="ach-lbl">10 بلاغات</div></div>
+            <div class="achievement"><div class="ach-icon" style="opacity:0.3">🏆</div><div class="ach-lbl">محارب</div></div>
+          </div>
+        </div>
+      </div></div>
+      <div class="phone-label">📊 My Stats</div>
+    </div>
+
+  </div><!-- /screens-grid -->
+</section>
+
+<!-- ─── FILE DOCS ──────────────────────────────────────────────────────── -->
+<section id="core-files" class="page-section">
+  <div class="section-tag">📁 Core Files</div>
+  <h2 class="section-title">ملفات القلب (Core)</h2>
+  <p class="section-subtitle">هذه الملفات هي أساس كل التطبيق — ثوابت، ألوان، اتصال بالإنترنت، Firebase.</p>
+  <div class="files-grid">
+
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#EAF3DE">🎨</div>
+        <div><h3>app_colors.dart</h3><div class="file-path">core/theme/app_colors.dart</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">يحتوي على كل ألوان التطبيق كـ constants ثابتة. أي تعديل على الألوان يتم هنا فقط ويُطبَّق في كل التطبيق تلقائياً.</p>
+        <div class="feature-tags">
+          <span class="tag green">Primary #1B3A2D</span>
+          <span class="tag green">Accent #3AC47D</span>
+          <span class="tag orange">Status Colors</span>
+          <span class="tag red">Severity Colors</span>
+          <span class="tag">Admin Colors</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#E6F1FB">✍️</div>
+        <div><h3>app_text_styles.dart</h3><div class="file-path">core/theme/app_text_styles.dart</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">كل أنماط الخط في مكان واحد — Display, Headline, Title, Body, Label. يستخدم خط Cairo العربي. بدل ما تكتب TextStyle في كل مكان، تستخدم AppTextStyles.headlineMedium مثلاً.</p>
+        <div class="feature-tags">
+          <span class="tag">Cairo Font</span>
+          <span class="tag blue">6 أنواع</span>
+          <span class="tag">Consistent</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#FAEEDA">🎯</div>
+        <div><h3>app_theme.dart</h3><div class="file-path">core/theme/app_theme.dart</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">يجمع كل شيء في ThemeData واحد لـ MaterialApp. يُعرّف شكل الأزرار، الحقول، الـ Cards، الـ SnackBar، وكل المكونات بشكل موحد. تمرره لـ GetMaterialApp ويُطبَّق على كل التطبيق.</p>
+        <div class="feature-tags">
+          <span class="tag">ThemeData</span>
+          <span class="tag green">Material 3</span>
+          <span class="tag blue">AppBar Style</span>
+          <span class="tag">Input Style</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#E6F1FB">🔗</div>
+        <div><h3>api_constants.dart</h3><div class="file-path">core/constants/api_constants.dart</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">كل endpoints لـ API في مكان واحد. عوّض baseUrl بـ URL السيرفر الخاص فيك. مقسّم: Auth, Reports, Admin, Users, Notifications, Leaderboard, Map.</p>
+        <div class="feature-tags">
+          <span class="tag blue">baseUrl</span>
+          <span class="tag">30+ endpoint</span>
+          <span class="tag orange">Timeouts</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#EAF3DE">⚡</div>
+        <div><h3>app_constants.dart</h3><div class="file-path">core/constants/app_constants.dart</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">ثوابت التطبيق العامة: اسم التطبيق، مفاتيح الـ SharedPreferences، أسماء Firestore Collections، نظام النقاط (10 نقاط/بلاغ، 2 نقطة/تصويت، 50 نقطة/إصلاح)، والـ Animation durations.</p>
+        <div class="feature-tags">
+          <span class="tag">Storage Keys</span>
+          <span class="tag green">Points System</span>
+          <span class="tag blue">Firebase Paths</span>
+          <span class="tag">Animation ms</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#FAEEDA">🗺️</div>
+        <div><h3>app_pages.dart + app_routes.dart</h3><div class="file-path">core/constants/</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc"><b>app_pages.dart</b>: أسماء كل الـ routes كـ constants (مثل AppPages.addReport). <b>app_routes.dart</b>: يربط كل route بـ Screen + Controller binding. تنقل باستخدام Get.toNamed(AppPages.X).</p>
+        <div class="feature-tags">
+          <span class="tag">22 Route</span>
+          <span class="tag blue">GetX Navigation</span>
+          <span class="tag green">Lazy Bindings</span>
+          <span class="tag">Transitions</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#E6F1FB">🌐</div>
+        <div><h3>api_helper.dart</h3><div class="file-path">core/helpers/api_helper.dart</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">Singleton يتعامل مع كل طلبات HTTP. يبني الـ headers تلقائياً، يضيف Bearer token، يدعم multipart لرفع الصور، ويوفر Helper methods لفحص النجاح واستخراج رسائل الخطأ.</p>
+        <div class="feature-tags">
+          <span class="tag green">GET / POST</span>
+          <span class="tag blue">PUT / PATCH</span>
+          <span class="tag orange">DELETE</span>
+          <span class="tag red">Multipart Upload</span>
+          <span class="tag">Auto Auth Header</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#fff3e0">🔥</div>
+        <div><h3>firebase_service.dart</h3><div class="file-path">core/services/firebase_service.dart</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">Singleton يجمع كل عمليات Firebase: رفع الصور للـ Storage، استماع realtime لـ Firestore، نظام التصويت بـ Transaction آمن، إشعارات FCM، وحفظ الـ FCM token.</p>
+        <div class="feature-tags">
+          <span class="tag red">Firestore Realtime</span>
+          <span class="tag orange">Storage Upload</span>
+          <span class="tag blue">FCM Push</span>
+          <span class="tag green">Transactions</span>
+          <span class="tag">Auth</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- AUTH FILES -->
+<section id="auth-files" class="page-section">
+  <div class="section-tag">🔐 Auth Feature</div>
+  <h2 class="section-title">ملفات المصادقة</h2>
+  <div class="files-grid">
+
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#FAEEDA">👤</div>
+        <div><h3>user_model.dart</h3><div class="file-path">auth/models/user_model.dart</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">يحتوي على: UserModel (مع حساب levelProgress وpointsToNextLevel تلقائياً)، LoginRequest، RegisterRequest، AuthResponse، LeaderboardEntry. يدعم fromJson/toJson.</p>
+        <div class="feature-tags">
+          <span class="tag green">UserModel</span>
+          <span class="tag blue">AuthResponse</span>
+          <span class="tag orange">Leaderboard Entry</span>
+          <span class="tag">Level Logic</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#E6F1FB">⚙️</div>
+        <div><h3>auth_controller.dart</h3><div class="file-path">auth/controllers/auth_controller.dart</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">يتحكم في تسجيل الدخول، إنشاء الحساب، التحقق من OTP، تسجيل الخروج. يحفظ المستخدم في SharedPreferences ويُعيد تحميله عند فتح التطبيق. يُعدّ FCM token تلقائياً عند الدخول.</p>
+        <div class="feature-tags">
+          <span class="tag">Login / Register</span>
+          <span class="tag blue">OTP + Timer</span>
+          <span class="tag green">Auto FCM Setup</span>
+          <span class="tag orange">Password Strength</span>
+          <span class="tag">Persist User</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- REPORT FILES -->
+<section id="report-files" class="page-section">
+  <div class="section-tag">📋 Report Feature</div>
+  <h2 class="section-title">ملفات البلاغات</h2>
+  <div class="files-grid">
+
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#EAF3DE">📄</div>
+        <div><h3>report_model.dart</h3><div class="file-path">report/models/report_model.dart</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">يحتوي على: ReportModel (مع helper getters مثل isDone, isHigh)، AddReportRequest، ReportListResponse (مع pagination)، ReportStats، ReportTimelineStep للـ tracking.</p>
+        <div class="feature-tags">
+          <span class="tag green">ReportModel</span>
+          <span class="tag blue">ReportStats</span>
+          <span class="tag orange">Timeline Step</span>
+          <span class="tag">Pagination</span>
+          <span class="tag">copyWith</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#E6F1FB">🧠</div>
+        <div><h3>report_controller.dart</h3><div class="file-path">report/controllers/report_controller.dart</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">الـ Controller الأهم في التطبيق. يستمع لـ Firestore realtime، يرفع الصور، يحدد الموقع بـ GPS، يُعالج التصويت بـ Transaction، ويبني الـ Timeline. كل شيء reactive بـ Rx.</p>
+        <div class="feature-tags">
+          <span class="tag red">Realtime Listen</span>
+          <span class="tag orange">GPS Location</span>
+          <span class="tag blue">Image Upload</span>
+          <span class="tag green">Vote Transaction</span>
+          <span class="tag">Timeline Builder</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ADMIN FILES -->
+<section id="admin-files" class="page-section">
+  <div class="section-tag">🏛️ Admin Feature</div>
+  <h2 class="section-title">ملفات لوحة البلدية</h2>
+  <div class="files-grid">
+
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#FAEEDA">👷</div>
+        <div><h3>team_model.dart</h3><div class="file-path">admin/models/team_model.dart</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">نموذج فريق العمل مع: الاسم، القائد، عدد الأعضاء، البلاغات المكلّفة، والمنجزة. يُستخدم في لوحة الأدمن لإسناد البلاغات وعرض الأداء.</p>
+        <div class="feature-tags">
+          <span class="tag">TeamModel</span>
+          <span class="tag blue">Performance Metrics</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#EAF3DE">⚙️</div>
+        <div><h3>admin_controller.dart</h3><div class="file-path">admin/controllers/admin_controller.dart</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">يستمع لكل البلاغات realtime، يحسب الإحصائيات، يُحدّث الحالة في Firestore + API في نفس الوقت، ويُكلّف الفرق. يدير الـ filter للتصفية.</p>
+        <div class="feature-tags">
+          <span class="tag red">Admin Realtime</span>
+          <span class="tag blue">Update Status</span>
+          <span class="tag green">Assign Teams</span>
+          <span class="tag">Filter</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#E6F1FB">📊</div>
+        <div><h3>admin_dashboard_screen.dart</h3><div class="file-path">admin/views/</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">الشاشة الرئيسية للبلدية: 4 بطاقات إحصائيات (تم/جاري/منتظرة/إجمالي)، أزرار سريعة، آخر 5 بلاغات، وملخص فرق العمل. كلها realtime من Firestore.</p>
+        <div class="feature-tags">
+          <span class="tag green">Stats Grid</span>
+          <span class="tag blue">Quick Actions</span>
+          <span class="tag">Teams Summary</span>
+          <span class="tag orange">Live Feed</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#FAEEDA">📋</div>
+        <div><h3>admin_reports_screen.dart</h3><div class="file-path">admin/views/</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">قائمة كل البلاغات مع فلتر بالحالة. كل بلاغ عنده 3 أزرار: التفاصيل، تحديث الحالة (bottom sheet)، تكليف فريق (bottom sheet مع قائمة الفرق).</p>
+        <div class="feature-tags">
+          <span class="tag">Filter Chips</span>
+          <span class="tag blue">Status Update</span>
+          <span class="tag green">Team Assign</span>
+          <span class="tag orange">Bottom Sheets</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- OTHER FILES -->
+<section id="other-files" class="page-section">
+  <div class="section-tag">🔔 باقي الميزات</div>
+  <h2 class="section-title">Profile / Notifications / Map / Rewards</h2>
+  <div class="files-grid">
+
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#EAF3DE">🔔</div>
+        <div><h3>notifications_controller.dart</h3><div class="file-path">notifications/controllers/</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">يستمع لإشعارات Firestore realtime ويعدّ الغير مقروءة (badge). يستقبل إشعارات FCM عند فتح التطبيق ويعرضها كـ SnackBar. يدعم قراءة فردية وجماعية بـ batch.</p>
+        <div class="feature-tags">
+          <span class="tag red">Realtime Listen</span>
+          <span class="tag blue">FCM Handler</span>
+          <span class="tag green">Batch Mark Read</span>
+          <span class="tag orange">Badge Count</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#E6F1FB">🗺️</div>
+        <div><h3>map_controller.dart</h3><div class="file-path">map/controllers/</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">يستمع للبلاغات ويحوّلها لـ Markers على Google Maps. الألوان تتغير حسب الحالة والخطورة. يدعم الفلتر بالحالة ويُحرّك الكاميرا للبلاغ المختار.</p>
+        <div class="feature-tags">
+          <span class="tag green">Google Maps</span>
+          <span class="tag blue">Color Markers</span>
+          <span class="tag">Filter Map</span>
+          <span class="tag orange">Camera Move</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#FAEEDA">🎁</div>
+        <div><h3>rewards_screen.dart</h3><div class="file-path">rewards/</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">يعرض رصيد النقاط ومكتبة المكافآت (قسائم، خصومات، هدايا). يوضح ما يمكن استبداله باللون الأخضر وما لا يكفي الرصيد له باللون الأحمر مع قفل. استبدال مع تأكيد dialog.</p>
+        <div class="feature-tags">
+          <span class="tag green">Points Balance</span>
+          <span class="tag">Categories Filter</span>
+          <span class="tag blue">Can/Cannot Afford</span>
+          <span class="tag orange">Confirm Dialog</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#EAF3DE">📊</div>
+        <div><h3>my_stats_screen.dart</h3><div class="file-path">profile/views/</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">يعرض: 4 بطاقات إحصائيات (إجمالي/مصلح/نقاط/درجة)، progress bar مستوى النشاط مع 3 درجات، و6 إنجازات (مكتسبة/مقفلة) بألوان مختلفة.</p>
+        <div class="feature-tags">
+          <span class="tag">4 Stat Cards</span>
+          <span class="tag blue">Level Progress</span>
+          <span class="tag green">6 Achievements</span>
+          <span class="tag orange">Badge System</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── FIREBASE SETUP ─────────────────────────────────────────────────── -->
+<section id="firebase-setup" class="page-section">
+  <div class="section-tag">🔥 Firebase</div>
+  <h2 class="section-title">ربط Firebase بالمشروع — خطوة بخطوة</h2>
+  <p class="section-subtitle">اتبع هذه الخطوات بالترتيب بالضبط. الوقت المتوقع: 20-30 دقيقة.</p>
+
+  <div class="steps-list">
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h3>إنشاء مشروع Firebase</h3>
+        <p>اذهب إلى <b>console.firebase.google.com</b> → أنشئ مشروعاً جديداً → اختر اسماً مثل "baladi-app". فعّل Google Analytics إذا أردت التتبع.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h3>تثبيت FlutterFire CLI</h3>
+        <div class="code-block"><span class="comment"># في الـ Terminal</span>
+dart pub global activate flutterfire_cli
+
+<span class="comment"># تأكد أنه مثبت</span>
+flutterfire --version</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h3>ربط المشروع بـ Firebase</h3>
+        <p>شغّل هذا الأمر من داخل مجلد المشروع. سيُنشئ تلقائياً ملف <code>lib/firebase_options.dart</code>.</p>
+        <div class="code-block"><span class="comment"># من داخل مجلد المشروع</span>
+cd baladi_app
+flutterfire configure
+
+<span class="comment"># اختر مشروع Firebase الذي أنشأته</span>
+<span class="comment"># اختر android و ios (أو ما تحتاجه)</span></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h3>تفعيل الخدمات في Firebase Console</h3>
+        <p>من قائمة Build في الـ sidebar:</p>
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="lbl">🔒 Authentication</div>
+            <div class="val">فعّل → Phone + Google</div>
+          </div>
+          <div class="info-item">
+            <div class="lbl">🗃️ Firestore Database</div>
+            <div class="val">أنشئ → Start in Test Mode</div>
+          </div>
+          <div class="info-item">
+            <div class="lbl">🗂️ Storage</div>
+            <div class="val">أنشئ → Start in Test Mode</div>
+          </div>
+          <div class="info-item">
+            <div class="lbl">📨 Cloud Messaging</div>
+            <div class="val">مفعّل تلقائياً</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <h3>إعداد Google Maps API</h3>
+        <p>اذهب إلى <b>console.cloud.google.com</b> → APIs → فعّل Maps SDK for Android + iOS → انسخ الـ API key</p>
+        <div class="code-block"><span class="comment"># Android: في AndroidManifest.xml داخل &lt;application&gt;</span>
+&lt;meta-data
+  android:name="com.google.android.geo.API_KEY"
+  android:value="<span class="string">YOUR_API_KEY_HERE</span>"/&gt;
+
+<span class="comment"># iOS: في AppDelegate.swift</span>
+<span class="keyword">import</span> GoogleMaps
+GMSServices.provideAPIKey(<span class="string">"YOUR_API_KEY_HERE"</span>)</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-content">
+        <h3>تحميل خط Cairo وإضافة الـ Assets</h3>
+        <p>حمّل Cairo من <b>fonts.google.com/specimen/Cairo</b> ثم ضع الملفات في:</p>
+        <div class="code-block">assets/
+└── fonts/
+    ├── Cairo-Regular.ttf
+    ├── Cairo-Medium.ttf
+    ├── Cairo-SemiBold.ttf
+    └── Cairo-Bold.ttf</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">7</div>
+      <div class="step-content">
+        <h3>إضافة الـ Permissions</h3>
+        <div class="code-block"><span class="comment"># Android: AndroidManifest.xml</span>
+&lt;uses-permission android:name="android.permission.INTERNET"/&gt;
+&lt;uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/&gt;
+&lt;uses-permission android:name="android.permission.CAMERA"/&gt;
+&lt;uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/&gt;
+
+<span class="comment"># iOS: Info.plist</span>
+NSLocationWhenInUseUsageDescription → <span class="string">"نحتاج موقعك لتحديد مكان البلاغ"</span>
+NSCameraUsageDescription → <span class="string">"لالتقاط صور الحفر"</span>
+NSPhotoLibraryUsageDescription → <span class="string">"لاختيار صور من معرضك"</span></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">8</div>
+      <div class="step-content">
+        <h3>تثبيت الحزم وتشغيل المشروع</h3>
+        <div class="code-block">flutter pub get
+flutter run
+
+<span class="comment"># إذا واجهت مشكلة في iOS</span>
+cd ios && pod install && cd ..</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FIREBASE RULES -->
+<section id="firebase-rules" class="page-section">
+  <div class="section-tag">🛡️ Security Rules</div>
+  <h2 class="section-title">قواعد الأمان</h2>
+  <p class="section-subtitle">ضعها في Firebase Console → Firestore → Rules. تمنع الوصول غير المصرح به.</p>
+
+  <div class="two-col">
+    <div>
+      <div style="font-weight:700;margin-bottom:8px;font-size:13px">🗃️ Firestore Rules</div>
+      <div class="code-block">rules_version = <span class="string">'2'</span>;
+service cloud.firestore {
+  match /databases/{db}/documents {
+    match /reports/{id} {
+      <span class="comment">// أي شخص يقرأ، فقط المسجل يكتب</span>
+      allow read: <span class="keyword">if</span> true;
+      allow create: <span class="keyword">if</span> request.auth != null;
+      allow update: <span class="keyword">if</span> request.auth != null;
+      allow delete: <span class="keyword">if</span> isAdmin();
+    }
+    match /users/{userId} {
+      allow read, write: <span class="keyword">if</span>
+        request.auth.uid == userId;
+      match /notifications/{n} {
+        allow read, write: <span class="keyword">if</span>
+          request.auth.uid == userId;
+      }
+    }
+    <span class="keyword">function</span> isAdmin() {
+      <span class="keyword">return</span> get(/users/$(request.auth.uid))
+        .data.role == <span class="string">'admin'</span>;
+    }
+  }
+}</div>
+    </div>
+    <div>
+      <div style="font-weight:700;margin-bottom:8px;font-size:13px">🗂️ Storage Rules</div>
+      <div class="code-block">rules_version = <span class="string">'2'</span>;
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /report_images/{img} {
+      <span class="comment">// أي شخص يقرأ الصور</span>
+      allow read: <span class="keyword">if</span> true;
+      <span class="comment">// المسجل يرفع بحد 5MB</span>
+      allow write: <span class="keyword">if</span>
+        request.auth != null
+        && request.resource.size < 5242880
+        && request.resource.contentType
+           .matches(<span class="string">'image/.*'</span>);
+    }
+    match /avatars/{userId} {
+      allow read: <span class="keyword">if</span> true;
+      allow write: <span class="keyword">if</span>
+        request.auth.uid == userId
+        && request.resource.size < 2097152;
+    }
+  }
+}</div>
+    </div>
+  </div>
+</section>
+
+<!-- FIREBASE FUNCTIONS -->
+<section id="firebase-functions" class="page-section">
+  <div class="section-tag">⚡ Cloud Functions</div>
+  <h2 class="section-title">الـ 5 Cloud Functions</h2>
+  <p class="section-subtitle">تعمل على السيرفر تلقائياً — لا تحتاج باك-إند منفصل لهذه المهام.</p>
+
+  <div class="files-grid">
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#FAEEDA">🔔</div>
+        <div><h3>onReportStatusChange</h3><div class="file-path">firebase/functions/index.js</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">تُراقب كل تغيير في حقل status لأي بلاغ. عند التغيير تُرسل push notification للمبلِّغ، تحفظ الإشعار في Firestore، وتُضيف 50 نقطة إذا تحوّل البلاغ لـ "done".</p>
+        <div class="feature-tags">
+          <span class="tag red">Auto Trigger</span>
+          <span class="tag blue">FCM Push</span>
+          <span class="tag green">+50 نقطة</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#EAF3DE">⭐</div>
+        <div><h3>onReportCreated</h3><div class="file-path">firebase/functions/index.js</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">تُشغَّل عند إنشاء بلاغ جديد. تُضيف 10 نقاط للمبلِّغ، تزيد عداد البلاغات في ملفه، وتفحص إذا يستحق ترقية الدرجة (برونزية→فضية→ذهبية).</p>
+        <div class="feature-tags">
+          <span class="tag green">+10 نقطة</span>
+          <span class="tag blue">Badge Check</span>
+          <span class="tag orange">Counter++</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#E6F1FB">👍</div>
+        <div><h3>onReportVoted</h3><div class="file-path">firebase/functions/index.js</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">تُراقب التغيير في مصفوفة الـ voters. عند إضافة ناخب جديد تُضيف له 2 نقطة. تعمل بأمان لأن التصويت نفسه محمي بـ Firestore Transaction.</p>
+        <div class="feature-tags">
+          <span class="tag blue">+2 نقطة</span>
+          <span class="tag">Diff Detection</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#FAEEDA">📢</div>
+        <div><h3>sendBroadcastNotification</h3><div class="file-path">firebase/functions/index.js</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">Callable function تُستدعى من الأدمن فقط. ترسل إشعار جماعي لكل المستخدمين عبر Firebase topic. يُستخدم للإعلانات من البلدية.</p>
+        <div class="feature-tags">
+          <span class="tag red">Admin Only</span>
+          <span class="tag blue">Topic Broadcast</span>
+          <span class="tag">Auth Check</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#E6F1FB">🧹</div>
+        <div><h3>cleanupRejectedReports</h3><div class="file-path">firebase/functions/index.js</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">تعمل تلقائياً كل 30 يوم. تحذف البلاغات المرفوضة التي مضى عليها 30 يوم. تنظيف تلقائي بدون تدخل.</p>
+        <div class="feature-tags">
+          <span class="tag">Auto Schedule</span>
+          <span class="tag red">Batch Delete</span>
+          <span class="tag green">30 Days</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="margin-top:24px">
+    <div style="font-weight:700;margin-bottom:8px;font-size:13px">🚀 نشر الـ Functions</div>
+    <div class="code-block"><span class="comment"># من مجلد firebase/functions</span>
+cd firebase/functions
+npm install
+
+<span class="comment"># نشر كل الـ functions</span>
+firebase deploy --only functions
+
+<span class="comment"># تجربة محلياً قبل النشر</span>
+firebase emulators:start --only functions,firestore</div>
+  </div>
+</section>
+
+<!-- FIREBASE FLOW -->
+<section id="firebase-flow" class="page-section">
+  <div class="section-tag">🔄 Realtime Flow</div>
+  <h2 class="section-title">كيف يعمل الـ Realtime؟</h2>
+  <p class="section-subtitle">رحلة البلاغ من لحظة الإرسال حتى يشوفه كل المستخدمين.</p>
+
+  <div style="margin-bottom:24px">
+    <div style="font-weight:700;font-size:13px;margin-bottom:12px">📸 إرسال بلاغ جديد</div>
+    <div class="flow">
+      <div class="flow-box">المستخدم يصور</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box firebase">Firebase Storage<br><small style="font-size:10px">رفع الصورة</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box firebase">Firestore<br><small style="font-size:10px">حفظ البيانات</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box accent">كل المستخدمين<br><small style="font-size:10px">يشوفوا الفيد</small></div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:24px">
+    <div style="font-weight:700;font-size:13px;margin-bottom:12px">🔄 تغيير الحالة من الأدمن</div>
+    <div class="flow">
+      <div class="flow-box primary">الأدمن يغيّر الحالة</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box firebase">Firestore Update</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box firebase">Cloud Function<br><small style="font-size:10px">تُشغَّل تلقائياً</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box accent">FCM Push + Firestore<br><small style="font-size:10px">إشعار فوري</small></div>
+    </div>
+  </div>
+
+  <div>
+    <div style="font-weight:700;font-size:13px;margin-bottom:12px">👂 كيف يعمل watchAllReports()</div>
+    <div class="code-block"><span class="comment">// في firebase_service.dart</span>
+Stream&lt;List&lt;ReportModel&gt;&gt; watchAllReports() {
+  <span class="keyword">return</span> _db
+    .collection(<span class="string">'reports'</span>)
+    .orderBy(<span class="string">'created_at'</span>, descending: true)
+    .snapshots()              <span class="comment">// ← يستمع realtime</span>
+    .map((snap) =&gt; snap.docs  <span class="comment">// ← كل تغيير يُطلق حدثاً</span>
+      .map((doc) =&gt; ReportModel.fromJson({...doc.data(), <span class="string">'id'</span>: doc.id}))
+      .toList());
+}
+
+<span class="comment">// في report_controller.dart</span>
+<span class="keyword">void</span> _listenToAllReports() {
+  _firebase.watchAllReports().listen((reports) {
+    allReports.assignAll(reports);  <span class="comment">// ← يُحدّث الـ UI تلقائياً</span>
+    _updateStats(reports);
+  });
+}</div>
+  </div>
+</section>
+
+<!-- RUN -->
+<section id="run" class="page-section">
+  <div class="section-tag">▶️ تشغيل المشروع</div>
+  <h2 class="section-title">الخطوات النهائية للتشغيل</h2>
+
+  <div class="setup-panels">
+    <div class="setup-panel">
+      <div class="setup-panel-header">
+        <div class="step-num" style="width:28px;height:28px;font-size:12px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;">1</div>
+        <h3>تحديث baseUrl</h3>
+        <div class="badge required">مطلوب</div>
+      </div>
+      <div class="setup-panel-body">
+        <p>افتح <code>lib/core/constants/api_constants.dart</code> وغيّر الـ baseUrl:</p>
+        <div class="code-block"><span class="keyword">static const</span> String baseUrl = <span class="string">'https://api.baladi-app.com/api/v1'</span>;
+<span class="comment">// غيّرها لـ URL السيرفر الخاص فيك</span>
+<span class="comment">// للتطوير المحلي: 'http://10.0.2.2:8000/api/v1' (Android)</span>
+<span class="comment">// للتطوير المحلي: 'http://localhost:8000/api/v1' (iOS)</span></div>
+      </div>
+    </div>
+
+    <div class="setup-panel">
+      <div class="setup-panel-header">
+        <div class="step-num" style="width:28px;height:28px;font-size:12px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;">2</div>
+        <h3>تثبيت الحزم</h3>
+        <div class="badge required">مطلوب</div>
+      </div>
+      <div class="setup-panel-body">
+        <div class="code-block">flutter pub get
+
+<span class="comment"># إذا أردت أن تعمل بدون API حقيقي الآن</span>
+<span class="comment"># الـ Firebase وحده كافٍ للـ realtime</span></div>
+      </div>
+    </div>
+
+    <div class="setup-panel">
+      <div class="setup-panel-header">
+        <div class="step-num" style="width:28px;height:28px;font-size:12px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;">3</div>
+        <h3>تشغيل التطبيق</h3>
+        <div class="badge required">مطلوب</div>
+      </div>
+      <div class="setup-panel-body">
+        <div class="code-block">flutter run
+
+<span class="comment"># لتشغيل على جهاز محدد</span>
+flutter devices
+flutter run -d device_id
+
+<span class="comment"># لبناء APK للأندرويد</span>
+flutter build apk --release
+
+<span class="comment"># لبناء IPA للآيفون</span>
+flutter build ipa</div>
+      </div>
+    </div>
+
+    <div class="setup-panel">
+      <div class="setup-panel-header">
+        <div class="step-num" style="width:28px;height:28px;font-size:12px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;">4</div>
+        <h3>إضافة مستخدم أدمن</h3>
+        <div class="badge optional">اختياري</div>
+      </div>
+      <div class="setup-panel-body">
+        <p>بعد تسجيل أول مستخدم، اذهب لـ Firestore Console واضف حقل role = "admin" يدوياً، أو اعمل صفحة sign-up مخصصة للأدمن.</p>
+        <div class="code-block"><span class="comment">// Firestore: users/{userId}</span>
+{
+  name: <span class="string">"اسم الأدمن"</span>,
+  role: <span class="string">"admin"</span>,   <span class="comment">// ← أضف هذا</span>
+  points: 0,
+  badge: <span class="string">"gold"</span>
+}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPENDENCIES -->
+<section id="dependencies" class="page-section">
+  <div class="section-tag">📦 Dependencies</div>
+  <h2 class="section-title">الحزم والمكتبات المستخدمة</h2>
+
+  <div class="files-grid">
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#EAF3DE">⚡</div>
+        <div><h3>get: ^4.6.6</h3><div class="file-path">State Management + Navigation</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">GetX للـ state management بـ Rx + Controllers، والـ navigation بدون context، و Dependency Injection بـ Get.lazyPut و Get.find.</p>
+      </div>
+    </div>
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#fff3e0">🔥</div>
+        <div><h3>Firebase Suite</h3><div class="file-path">firebase_core, auth, firestore, storage, messaging</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">firebase_core للتهيئة، firebase_auth للمصادقة، cloud_firestore للـ realtime database، firebase_storage لرفع الصور، firebase_messaging للإشعارات.</p>
+      </div>
+    </div>
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#E6F1FB">🗺️</div>
+        <div><h3>google_maps_flutter + geolocator</h3><div class="file-path">Maps + Location</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">google_maps_flutter للخريطة التفاعلية مع الـ markers، geolocator لتحديد الموقع بـ GPS، geocoding لتحويل الإحداثيات لعنوان نصي.</p>
+      </div>
+    </div>
+    <div class="file-card">
+      <div class="file-card-header">
+        <div class="file-icon" style="background:#FAEEDA">📷</div>
+        <div><h3>image_picker + http</h3><div class="file-path">Media + Networking</div></div>
+      </div>
+      <div class="file-card-body">
+        <p class="file-desc">image_picker لالتقاط صور من الكاميرا أو المعرض، http للـ REST API requests مع دعم multipart لرفع الصور، shared_preferences لحفظ البيانات محلياً.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px">
+    <div class="code-block"><span class="comment"># تثبيت كل الحزم بأمر واحد</span>
+flutter pub add get firebase_core firebase_auth cloud_firestore firebase_storage \
+  firebase_messaging google_maps_flutter geolocator geocoding \
+  image_picker http shared_preferences uuid cached_network_image</div>
+  </div>
+</section>
+
+<!-- Footer -->
+<section class="page-section" style="background:var(--primary);color:#fff;text-align:center;padding:40px">
+  <div style="font-size:32px;margin-bottom:10px">🛣️</div>
+  <div style="font-size:20px;font-weight:800;margin-bottom:6px">بلدي — مشروع كامل</div>
+  <div style="font-size:12px;color:var(--muted-dark)">51 ملف Dart · 5 Cloud Functions · 20+ شاشة · 8800 سطر</div>
+  <div style="margin-top:16px;font-size:11px;color:var(--muted-dark)">Flutter + GetX + Firebase Realtime + Google Maps</div>
+</section>
+
+</main>
+
+<script>
+// Sidebar active state
+document.querySelectorAll('.nav-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+  });
+});
+
+// Highlight sidebar on scroll
+const sections = document.querySelectorAll('section[id]');
+const navItems = document.querySelectorAll('.nav-item');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const top = section.offsetTop - 80;
+    if(pageYOffset >= top) current = section.getAttribute('id');
+  });
+  navItems.forEach(item => {
+    item.classList.remove('active');
+    if(item.getAttribute('href') === '#' + current) item.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>بلدي — توثيق وواجهات المشروع</title>
+<title>بلدي — فكرة مشروع ولمحة للمستثمر</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -47,17 +47,19 @@ body {
   background: var(--grey50);
   color: var(--grey800);
   min-height: 100vh;
+  direction: rtl;
 }
 
 /* ─── Layout ──────────────────────────────────────────────────────── */
 .sidebar {
   position: fixed;
-  top: 0; right: 0;
+  top: 0; right: 0; left: auto;
   width: 260px; height: 100vh;
   background: var(--primary);
   overflow-y: auto;
   z-index: 100;
   padding: 0 0 30px;
+  direction: rtl;
 }
 .sidebar-header {
   padding: 24px 20px 16px;
@@ -1094,107 +1096,245 @@ body {
   .screens-grid { grid-template-columns: repeat(2, 1fr); }
   .files-grid { grid-template-columns: 1fr; }
 }
+/* ─── Investor Pitch Section ──────────────────────────────────────── */
+.pitch-section {
+  background: linear-gradient(180deg, #fff 0%, var(--grey50) 100%);
+  padding: 56px 40px;
+  border-bottom: 1px solid var(--border);
+}
+.pitch-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.pitch-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+  position: relative;
+  overflow: hidden;
+}
+.pitch-card::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 70px; height: 70px;
+  background: var(--accent-soft);
+  border-radius: 0 0 0 70px;
+  opacity: 0.5;
+}
+.pitch-card .pitch-icon {
+  font-size: 26px;
+  margin-bottom: 10px;
+  position: relative;
+}
+.pitch-card h4 {
+  font-size: 14px; font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 6px;
+  position: relative;
+}
+.pitch-card p {
+  font-size: 12px; color: var(--grey600);
+  line-height: 1.7;
+  position: relative;
+}
+.problem-solution {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.ps-box {
+  border-radius: 16px;
+  padding: 24px;
+}
+.ps-box.problem {
+  background: var(--high-bg);
+  border: 1px solid #f5c6c6;
+}
+.ps-box.solution {
+  background: var(--done-bg);
+  border: 1px solid #b8dba0;
+}
+.ps-box .ps-label {
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+.ps-box.problem .ps-label { color: var(--high); }
+.ps-box.solution .ps-label { color: var(--done); }
+.ps-box ul { list-style: none; }
+.ps-box li {
+  font-size: 13px; color: var(--grey700);
+  line-height: 1.8;
+  padding-right: 18px;
+  position: relative;
+  margin-bottom: 6px;
+}
+.ps-box.problem li::before {
+  content: '✕'; position: absolute; right: 0;
+  color: var(--high); font-weight: 700; font-size: 11px; top: 2px;
+}
+.ps-box.solution li::before {
+  content: '✓'; position: absolute; right: 0;
+  color: var(--done); font-weight: 700; font-size: 11px; top: 2px;
+}
+.revenue-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.revenue-card {
+  background: var(--primary);
+  border-radius: 14px;
+  padding: 18px;
+  text-align: center;
+}
+.revenue-card .rev-icon { font-size: 22px; margin-bottom: 8px; }
+.revenue-card .rev-title { font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.revenue-card .rev-desc { font-size: 10px; color: var(--muted-dark); line-height: 1.6; }
+.market-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.market-stat {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+.market-stat .ms-num {
+  font-size: 22px; font-weight: 800;
+  color: var(--accent);
+}
+.market-stat .ms-lbl {
+  font-size: 10px; color: var(--grey600);
+  margin-top: 4px;
+}
+@media(max-width:900px){
+  .pitch-grid, .problem-solution, .revenue-row, .market-stats { grid-template-columns: 1fr 1fr; }
+}
 </style>
-</head>
 <body>
-
-<!-- ═══════════════════════════════════════════════════════════════════ -->
-<!-- SIDEBAR -->
-<!-- ═══════════════════════════════════════════════════════════════════ -->
 <nav class="sidebar">
-  <div class="sidebar-header">
-    <div class="sidebar-logo">
-      <div class="icon">🛣️</div>
-      <div>
-        <span>بلدي</span>
-        <small>توثيق المشروع الكامل</small>
-      </div>
-    </div>
-  </div>
-
-  <div class="nav-section-label">نظرة عامة</div>
+  <div class="sidebar-header"><div class="sidebar-logo"><div class="icon">🛣️</div><div><span>بلدي</span><small>فكرة مشروع</small></div></div></div>
+  <div class="nav-section-label">المحتوى</div>
   <a href="#overview" class="nav-item active"><div class="nav-dot"></div>مقدمة المشروع</a>
-  <a href="#architecture" class="nav-item"><div class="nav-dot"></div>هيكل المشروع</a>
+  <a href="#pitch" class="nav-item"><div class="nav-dot"></div>💼 لمحة للمستثمر</a>
   <a href="#screens" class="nav-item"><div class="nav-dot"></div>جميع الواجهات</a>
-
-  <div class="nav-section-label">الملفات</div>
-  <a href="#core-files" class="nav-item"><div class="nav-dot"></div>ملفات Core</a>
-  <a href="#auth-files" class="nav-item"><div class="nav-dot"></div>Auth</a>
-  <a href="#report-files" class="nav-item"><div class="nav-dot"></div>Report</a>
-  <a href="#admin-files" class="nav-item"><div class="nav-dot"></div>Admin</a>
-  <a href="#other-files" class="nav-item"><div class="nav-dot"></div>Profile / Notif / Map</a>
-
-  <div class="nav-section-label">Firebase</div>
-  <a href="#firebase-setup" class="nav-item"><div class="nav-dot"></div>ربط Firebase خطوة بخطوة</a>
-  <a href="#firebase-rules" class="nav-item"><div class="nav-dot"></div>Security Rules</a>
-  <a href="#firebase-functions" class="nav-item"><div class="nav-dot"></div>Cloud Functions</a>
-  <a href="#firebase-flow" class="nav-item"><div class="nav-dot"></div>كيف يشتغل Realtime</a>
-
-  <div class="nav-section-label">تشغيل المشروع</div>
-  <a href="#run" class="nav-item"><div class="nav-dot"></div>خطوات التشغيل</a>
-  <a href="#dependencies" class="nav-item"><div class="nav-dot"></div>الحزم والمكتبات</a>
 </nav>
-
-<!-- ═══════════════════════════════════════════════════════════════════ -->
-<!-- MAIN -->
-<!-- ═══════════════════════════════════════════════════════════════════ -->
 <main class="main">
-
-<!-- ─── HERO ─────────────────────────────────────────────────────────── -->
 <section id="overview" class="section-hero">
-  <div class="hero-badge">🛣️ Flutter + Firebase + GetX</div>
-  <h1>بلدي — توثيق المشروع الكامل</h1>
-  <p>تطبيق الإبلاغ عن الحفر والطرق — شرح كل ملف، كل شاشة، وكيفية ربط Firebase خطوة بخطوة.</p>
+  <div class="hero-badge">💡 فكرة قيد التطوير</div>
+  <h1>بلدي</h1>
+  <p>تطبيق جوال للإبلاغ عن الحفر وأعطال الطرق، يربط المواطن بالبلدية مباشرة ويحوّل البلاغات العشوائية إلى نظام منظّم وشفاف.</p>
   <div class="stats-row">
-    <div class="stat-pill"><div class="num">51</div><div class="lbl">ملف Dart</div></div>
-    <div class="stat-pill"><div class="num">20+</div><div class="lbl">شاشة</div></div>
-    <div class="stat-pill"><div class="num">8</div><div class="lbl">Controllers</div></div>
-    <div class="stat-pill"><div class="num">5</div><div class="lbl">Cloud Functions</div></div>
-    <div class="stat-pill"><div class="num">8800</div><div class="lbl">سطر كود</div></div>
+    <div class="stat-pill"><div class="num">13</div><div class="lbl">واجهة مصمّمة</div></div>
+    <div class="stat-pill"><div class="num">2</div><div class="lbl">أدوار: مواطن وبلدية</div></div>
   </div>
 </section>
+<section id="pitch" class="pitch-section">
+  <div class="section-tag">💼 لمحة سريعة للمستثمر</div>
+  <h2 class="section-title">بلدي يحوّل بلاغات المواطنين العشوائية إلى نظام بلدي منظّم</h2>
+  <p class="section-subtitle">تطبيق جوال يربط المواطن بالبلدية مباشرة — من لحظة اكتشاف العطل في الطريق حتى إصلاحه، بشفافية كاملة وبيانات حقيقية لصنّاع القرار.</p>
 
-<!-- ─── ARCHITECTURE ──────────────────────────────────────────────────── -->
-<section id="architecture" class="page-section">
-  <div class="section-tag">🏗️ هيكل المشروع</div>
-  <h2 class="section-title">Clean Architecture — Feature-First</h2>
-  <p class="section-subtitle">المشروع مقسّم بأسلوب Feature-First يعني كل ميزة عندها مجلدها الخاص بـ Model + Controller + View. هذا يجعل الكود سهل القراءة والتوسّع.</p>
+  <!-- Problem / Solution -->
+  <div class="problem-solution">
+    <div class="ps-box problem">
+      <div class="ps-label">⚠️ المشكلة اليوم</div>
+      <ul>
+        <li>المواطن يبلّغ عن الحفر بمكالمة هاتفية أو منشور سوشال ميديا يضيع بسرعة</li>
+        <li>البلدية لا تملك صورة شاملة بمواقع الأعطال وأولوياتها</li>
+        <li>توزيع فرق الصيانة يدوي وغير مرتبط ببيانات حقيقية</li>
+        <li>لا توجد طريقة لمعرفة ما إذا تم حل المشكلة أو متابعتها</li>
+      </ul>
+    </div>
+    <div class="ps-box solution">
+      <div class="ps-label">✅ الحل عبر بلدي</div>
+      <ul>
+        <li>بلاغ بصورة وموقع GPS دقيق في أقل من 30 ثانية</li>
+        <li>خريطة حية تُظهر للبلدية كل الأعطال مرتبة بالخطورة والتكرار</li>
+        <li>تكليف فرق العمل وتتبع الإصلاح من لوحة تحكم واحدة</li>
+        <li>تايملاين شفاف يطمئن المواطن ويبني الثقة بالبلدية</li>
+      </ul>
+    </div>
+  </div>
 
-  <div class="arch-diagram">
-    <div class="arch-layer">
-      <div class="arch-layer-title">📦 core</div>
-      <div class="arch-item"><div class="dot" style="background:#3AC47D"></div>theme/</div>
-      <div class="arch-item"><div class="dot" style="background:#185FA5"></div>constants/</div>
-      <div class="arch-item"><div class="dot" style="background:#854F0B"></div>helpers/</div>
-      <div class="arch-item"><div class="dot" style="background:#A32D2D"></div>services/</div>
-      <div class="arch-item"><div class="dot" style="background:#6C757D"></div>utils/</div>
+  <!-- Key Value Props -->
+  <div class="pitch-grid">
+    <div class="pitch-card">
+      <div class="pitch-icon">📍</div>
+      <h4>بيانات جغرافية حقيقية</h4>
+      <p>كل بلاغ مرتبط بموقع GPS دقيق، يبني خريطة حية لحالة البنية التحتية في المدينة — أداة تخطيط لا تقدّر بثمن للبلدية.</p>
     </div>
-    <div class="arch-layer">
-      <div class="arch-layer-title">🎯 features</div>
-      <div class="arch-item"><div class="dot" style="background:#1B3A2D"></div>auth/</div>
-      <div class="arch-item"><div class="dot" style="background:#3AC47D"></div>home/</div>
-      <div class="arch-item"><div class="dot" style="background:#185FA5"></div>report/</div>
-      <div class="arch-item"><div class="dot" style="background:#854F0B"></div>map/</div>
-      <div class="arch-item"><div class="dot" style="background:#A32D2D"></div>profile/</div>
-      <div class="arch-item"><div class="dot" style="background:#6C757D"></div>admin/</div>
-      <div class="arch-item"><div class="dot" style="background:#FFB300"></div>rewards/</div>
-      <div class="arch-item"><div class="dot" style="background:#8e24aa"></div>notifications/</div>
+    <div class="pitch-card">
+      <div class="pitch-icon">🤝</div>
+      <h4>تفعيل المجتمع المحلي</h4>
+      <p>نظام النقاط والمكافآت يحوّل المواطن من متفرّج إلى شريك فعّال في تحسين مدينته — مشاركة مدنية حقيقية بدل الشكوى.</p>
     </div>
-    <div class="arch-layer">
-      <div class="arch-layer-title">🔧 كل feature تحتوي</div>
-      <div class="arch-item"><div class="dot" style="background:#3AC47D"></div>models/ ← البيانات</div>
-      <div class="arch-item"><div class="dot" style="background:#185FA5"></div>controllers/ ← المنطق</div>
-      <div class="arch-item"><div class="dot" style="background:#1B3A2D"></div>views/ ← الواجهة</div>
-      <div class="arch-item"><div class="dot" style="background:#854F0B"></div>widgets/ ← مكونات</div>
+    <div class="pitch-card">
+      <div class="pitch-icon">⚡</div>
+      <h4>كفاءة تشغيلية للبلدية</h4>
+      <p>تكليف وتتبع فرق العمل من لوحة واحدة يقلّل زمن الاستجابة ويوفّر تكلفة التنسيق اليدوي بين الإدارات.</p>
+    </div>
+  </div>
+
+  <!-- Revenue Model -->
+  <h3 style="font-size:16px;font-weight:700;margin-bottom:14px;color:var(--primary)">💰 نموذج الإيراد المقترح</h3>
+  <div class="revenue-row">
+    <div class="revenue-card">
+      <div class="rev-icon">🏛️</div>
+      <div class="rev-title">اشتراك بلديات (SaaS)</div>
+      <div class="rev-desc">رسوم سنوية لكل بلدية حسب عدد السكان أو البلاغات</div>
+    </div>
+    <div class="revenue-card">
+      <div class="rev-icon">📊</div>
+      <div class="rev-title">تحليلات متقدمة</div>
+      <div class="rev-desc">تقارير وخرائط حرارية للبنية التحتية كخدمة إضافية مدفوعة</div>
+    </div>
+    <div class="revenue-card">
+      <div class="rev-icon">🎁</div>
+      <div class="rev-title">شراكات المكافآت</div>
+      <div class="rev-desc">شركات محلية تموّل المكافآت مقابل ظهور العلامة التجارية</div>
+    </div>
+    <div class="revenue-card">
+      <div class="rev-icon">🔌</div>
+      <div class="rev-title">API للجهات الحكومية</div>
+      <div class="rev-desc">دمج البيانات مع أنظمة وزارية أو مشاريع إعادة التأهيل</div>
+    </div>
+  </div>
+
+  <!-- Market Opportunity -->
+  <h3 style="font-size:16px;font-weight:700;margin:28px 0 14px;color:var(--primary)">🌍 الفرصة السوقية</h3>
+  <div class="market-stats">
+    <div class="market-stat">
+      <div class="ms-num">14</div>
+      <div class="ms-lbl">محافظة سورية تحتاج حلاً مماثلاً</div>
+    </div>
+    <div class="market-stat">
+      <div class="ms-num">100%</div>
+      <div class="ms-lbl">بنية تحتية بحاجة لإعادة تأهيل وتوثيق</div>
+    </div>
+    <div class="market-stat">
+      <div class="ms-num">🎯</div>
+      <div class="ms-lbl">لا يوجد حل منظّم ومعتمد محلياً حتى الآن</div>
+    </div>
+    <div class="market-stat">
+      <div class="ms-num">∞</div>
+      <div class="ms-lbl">قابلية التوسع لخدمات بلدية أخرى (إنارة، نظافة، صرف صحي)</div>
     </div>
   </div>
 </section>
-
-<!-- ─── SCREENS ───────────────────────────────────────────────────────── -->
 <section id="screens" class="page-section">
   <div class="section-tag">📱 الواجهات</div>
   <h2 class="section-title">كل شاشات التطبيق</h2>
-  <p class="section-subtitle">تصميم كامل بنفس ألوان وأحجام التطبيق الحقيقي</p>
+  <p class="section-subtitle">تصاميم واجهات المستخدم المقترحة للتطبيق — 13 شاشة تغطي رحلة المواطن ولوحة البلدية</p>
 
   <div class="screens-grid">
 
@@ -1288,8 +1428,8 @@ body {
               <div class="severity-chip" style="background:#FCEBEB;color:#A32D2D">🔴 عالية</div>
             </div>
             <div class="report-card-mini-body">
-              <div class="report-title-mini">حفرة شارع النزهة</div>
-              <div class="report-addr-mini">📍 حي النزهة، الرياض</div>
+              <div class="report-title-mini">حفرة شارع الحميدية</div>
+              <div class="report-addr-mini">📍 حي الحميدية، حمص</div>
               <div class="report-meta-row">
                 <div class="vote-btn-mini">👍 12 تأكيد</div>
                 <div class="status-badge-mini" style="background:#E6F1FB;color:#185FA5">🔄 جاري الإصلاح</div>
@@ -1302,7 +1442,7 @@ body {
             </div>
             <div class="report-card-mini-body">
               <div class="report-title-mini">تشقق في الرصيف</div>
-              <div class="report-addr-mini">📍 شارع التحلية</div>
+              <div class="report-addr-mini">📍 شارع وادي السايح</div>
               <div class="report-meta-row">
                 <div class="vote-btn-mini">👍 3 تأكيد</div>
                 <div class="status-badge-mini" style="background:#EAF3DE;color:#3B6D11">✅ تم الإصلاح</div>
@@ -1334,7 +1474,7 @@ body {
             <div class="add-img-box">📷<span>اضغط للتصوير أو الاختيار</span></div>
             <div class="add-section-label">📍 الموقع *</div>
             <div class="add-location">
-              <div class="addr">📍 حي النزهة، الرياض</div>
+              <div class="addr">📍 حي الحميدية، حمص</div>
               <button class="add-location .gps-btn" style="background:#1B3A2D;color:#fff;font-size:8px;padding:4px 8px;border-radius:6px;border:none;">تحديد</button>
             </div>
             <div class="add-section-label">⚠️ درجة الخطورة *</div>
@@ -1344,7 +1484,7 @@ body {
               <div class="sev-opt" style="border-color:var(--border)">🔴<span class="sev-lbl" style="color:#6C757D">عالية</span></div>
             </div>
             <div class="add-section-label">📝 وصف مختصر</div>
-            <input class="form-input" placeholder="حفرة كبيرة في شارع النزهة..." style="width:100%"/>
+            <input class="form-input" placeholder="حفرة كبيرة في شارع الحميدية..." style="width:100%"/>
             <button class="add-submit">📤 إرسال البلاغ للبلدية</button>
           </div>
         </div>
@@ -1363,8 +1503,8 @@ body {
           <div class="track-card">
             <span style="font-size:22px">🛣️</span>
             <div>
-              <div class="track-title">حفرة شارع النزهة</div>
-              <div class="track-addr">📍 حي النزهة، الرياض</div>
+              <div class="track-title">حفرة شارع الحميدية</div>
+              <div class="track-addr">📍 حي الحميدية، حمص</div>
             </div>
             <div class="status-badge-mini" style="background:rgba(255,255,255,0.15);color:#fff;border-radius:8px;padding:3px 7px">🔄 جاري</div>
           </div>
@@ -1539,8 +1679,8 @@ body {
           <div class="admin-report-row">
             <div class="admin-report-img">🛣️</div>
             <div style="flex:1">
-              <div class="admin-report-title">حفرة شارع النزهة</div>
-              <div class="admin-report-addr">📍 حي النزهة</div>
+              <div class="admin-report-title">حفرة شارع الحميدية</div>
+              <div class="admin-report-addr">📍 حي الحميدية</div>
             </div>
             <div class="status-badge-mini" style="background:#FCEBEB;color:#A32D2D">🔴 عالية</div>
           </div>
@@ -1548,7 +1688,7 @@ body {
             <div class="admin-report-img">🛣️</div>
             <div style="flex:1">
               <div class="admin-report-title">تشقق في الرصيف</div>
-              <div class="admin-report-addr">📍 التحلية</div>
+              <div class="admin-report-addr">📍 وادي السايح</div>
             </div>
             <div class="status-badge-mini" style="background:#EAF3DE;color:#3B6D11">✅ تم</div>
           </div>
@@ -1680,7 +1820,7 @@ body {
             <div class="reward-card">
               <div class="reward-icon-area">☕</div>
               <div class="reward-body">
-                <div class="reward-title">كافيه ستاربكس</div>
+                <div class="reward-title">كافيه دردشات</div>
                 <div class="reward-desc">خصم 15% مشروب</div>
                 <div class="reward-row">
                   <div class="reward-cost" style="background:var(--done-bg);color:var(--done)">⭐ 500</div>
@@ -1692,7 +1832,7 @@ body {
               <div class="reward-icon-area">⛽</div>
               <div class="reward-body">
                 <div class="reward-title">خصم بنزين</div>
-                <div class="reward-desc">20 ريال وقود</div>
+                <div class="reward-desc">20 ألف ليرة وقود</div>
                 <div class="reward-row">
                   <div class="reward-cost" style="background:var(--done-bg);color:var(--done)">⭐ 300</div>
                   <button class="redeem-btn">استبدل</button>
@@ -1703,7 +1843,7 @@ body {
               <div class="reward-icon-area" style="background:var(--grey100)">📱</div>
               <div class="reward-body">
                 <div class="reward-title">كرت شحن</div>
-                <div class="reward-desc">50 ريال أي شبكة</div>
+                <div class="reward-desc">50 ألف ليرة أي شبكة</div>
                 <div class="reward-row">
                   <div class="reward-cost" style="background:var(--high-bg);color:var(--high)">⭐ 1000</div>
                   <button class="redeem-btn" style="background:var(--grey400)">🔒</button>
@@ -1713,8 +1853,8 @@ body {
             <div class="reward-card">
               <div class="reward-icon-area">🛒</div>
               <div class="reward-body">
-                <div class="reward-title">قسيمة لولو</div>
-                <div class="reward-desc">خصم 50 ريال</div>
+                <div class="reward-title">قسيمة كلوفر</div>
+                <div class="reward-desc">خصم 50 ألف ليرة</div>
                 <div class="reward-row">
                   <div class="reward-cost" style="background:var(--high-bg);color:var(--high)">⭐ 800</div>
                   <button class="redeem-btn" style="background:var(--grey400)">🔒</button>
@@ -1776,878 +1916,11 @@ body {
   </div><!-- /screens-grid -->
 </section>
 
-<!-- ─── FILE DOCS ──────────────────────────────────────────────────────── -->
-<section id="core-files" class="page-section">
-  <div class="section-tag">📁 Core Files</div>
-  <h2 class="section-title">ملفات القلب (Core)</h2>
-  <p class="section-subtitle">هذه الملفات هي أساس كل التطبيق — ثوابت، ألوان، اتصال بالإنترنت، Firebase.</p>
-  <div class="files-grid">
-
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#EAF3DE">🎨</div>
-        <div><h3>app_colors.dart</h3><div class="file-path">core/theme/app_colors.dart</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">يحتوي على كل ألوان التطبيق كـ constants ثابتة. أي تعديل على الألوان يتم هنا فقط ويُطبَّق في كل التطبيق تلقائياً.</p>
-        <div class="feature-tags">
-          <span class="tag green">Primary #1B3A2D</span>
-          <span class="tag green">Accent #3AC47D</span>
-          <span class="tag orange">Status Colors</span>
-          <span class="tag red">Severity Colors</span>
-          <span class="tag">Admin Colors</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#E6F1FB">✍️</div>
-        <div><h3>app_text_styles.dart</h3><div class="file-path">core/theme/app_text_styles.dart</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">كل أنماط الخط في مكان واحد — Display, Headline, Title, Body, Label. يستخدم خط Cairo العربي. بدل ما تكتب TextStyle في كل مكان، تستخدم AppTextStyles.headlineMedium مثلاً.</p>
-        <div class="feature-tags">
-          <span class="tag">Cairo Font</span>
-          <span class="tag blue">6 أنواع</span>
-          <span class="tag">Consistent</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#FAEEDA">🎯</div>
-        <div><h3>app_theme.dart</h3><div class="file-path">core/theme/app_theme.dart</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">يجمع كل شيء في ThemeData واحد لـ MaterialApp. يُعرّف شكل الأزرار، الحقول، الـ Cards، الـ SnackBar، وكل المكونات بشكل موحد. تمرره لـ GetMaterialApp ويُطبَّق على كل التطبيق.</p>
-        <div class="feature-tags">
-          <span class="tag">ThemeData</span>
-          <span class="tag green">Material 3</span>
-          <span class="tag blue">AppBar Style</span>
-          <span class="tag">Input Style</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#E6F1FB">🔗</div>
-        <div><h3>api_constants.dart</h3><div class="file-path">core/constants/api_constants.dart</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">كل endpoints لـ API في مكان واحد. عوّض baseUrl بـ URL السيرفر الخاص فيك. مقسّم: Auth, Reports, Admin, Users, Notifications, Leaderboard, Map.</p>
-        <div class="feature-tags">
-          <span class="tag blue">baseUrl</span>
-          <span class="tag">30+ endpoint</span>
-          <span class="tag orange">Timeouts</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#EAF3DE">⚡</div>
-        <div><h3>app_constants.dart</h3><div class="file-path">core/constants/app_constants.dart</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">ثوابت التطبيق العامة: اسم التطبيق، مفاتيح الـ SharedPreferences، أسماء Firestore Collections، نظام النقاط (10 نقاط/بلاغ، 2 نقطة/تصويت، 50 نقطة/إصلاح)، والـ Animation durations.</p>
-        <div class="feature-tags">
-          <span class="tag">Storage Keys</span>
-          <span class="tag green">Points System</span>
-          <span class="tag blue">Firebase Paths</span>
-          <span class="tag">Animation ms</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#FAEEDA">🗺️</div>
-        <div><h3>app_pages.dart + app_routes.dart</h3><div class="file-path">core/constants/</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc"><b>app_pages.dart</b>: أسماء كل الـ routes كـ constants (مثل AppPages.addReport). <b>app_routes.dart</b>: يربط كل route بـ Screen + Controller binding. تنقل باستخدام Get.toNamed(AppPages.X).</p>
-        <div class="feature-tags">
-          <span class="tag">22 Route</span>
-          <span class="tag blue">GetX Navigation</span>
-          <span class="tag green">Lazy Bindings</span>
-          <span class="tag">Transitions</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#E6F1FB">🌐</div>
-        <div><h3>api_helper.dart</h3><div class="file-path">core/helpers/api_helper.dart</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">Singleton يتعامل مع كل طلبات HTTP. يبني الـ headers تلقائياً، يضيف Bearer token، يدعم multipart لرفع الصور، ويوفر Helper methods لفحص النجاح واستخراج رسائل الخطأ.</p>
-        <div class="feature-tags">
-          <span class="tag green">GET / POST</span>
-          <span class="tag blue">PUT / PATCH</span>
-          <span class="tag orange">DELETE</span>
-          <span class="tag red">Multipart Upload</span>
-          <span class="tag">Auto Auth Header</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#fff3e0">🔥</div>
-        <div><h3>firebase_service.dart</h3><div class="file-path">core/services/firebase_service.dart</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">Singleton يجمع كل عمليات Firebase: رفع الصور للـ Storage، استماع realtime لـ Firestore، نظام التصويت بـ Transaction آمن، إشعارات FCM، وحفظ الـ FCM token.</p>
-        <div class="feature-tags">
-          <span class="tag red">Firestore Realtime</span>
-          <span class="tag orange">Storage Upload</span>
-          <span class="tag blue">FCM Push</span>
-          <span class="tag green">Transactions</span>
-          <span class="tag">Auth</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- AUTH FILES -->
-<section id="auth-files" class="page-section">
-  <div class="section-tag">🔐 Auth Feature</div>
-  <h2 class="section-title">ملفات المصادقة</h2>
-  <div class="files-grid">
-
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#FAEEDA">👤</div>
-        <div><h3>user_model.dart</h3><div class="file-path">auth/models/user_model.dart</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">يحتوي على: UserModel (مع حساب levelProgress وpointsToNextLevel تلقائياً)، LoginRequest، RegisterRequest، AuthResponse، LeaderboardEntry. يدعم fromJson/toJson.</p>
-        <div class="feature-tags">
-          <span class="tag green">UserModel</span>
-          <span class="tag blue">AuthResponse</span>
-          <span class="tag orange">Leaderboard Entry</span>
-          <span class="tag">Level Logic</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#E6F1FB">⚙️</div>
-        <div><h3>auth_controller.dart</h3><div class="file-path">auth/controllers/auth_controller.dart</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">يتحكم في تسجيل الدخول، إنشاء الحساب، التحقق من OTP، تسجيل الخروج. يحفظ المستخدم في SharedPreferences ويُعيد تحميله عند فتح التطبيق. يُعدّ FCM token تلقائياً عند الدخول.</p>
-        <div class="feature-tags">
-          <span class="tag">Login / Register</span>
-          <span class="tag blue">OTP + Timer</span>
-          <span class="tag green">Auto FCM Setup</span>
-          <span class="tag orange">Password Strength</span>
-          <span class="tag">Persist User</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- REPORT FILES -->
-<section id="report-files" class="page-section">
-  <div class="section-tag">📋 Report Feature</div>
-  <h2 class="section-title">ملفات البلاغات</h2>
-  <div class="files-grid">
-
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#EAF3DE">📄</div>
-        <div><h3>report_model.dart</h3><div class="file-path">report/models/report_model.dart</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">يحتوي على: ReportModel (مع helper getters مثل isDone, isHigh)، AddReportRequest، ReportListResponse (مع pagination)، ReportStats، ReportTimelineStep للـ tracking.</p>
-        <div class="feature-tags">
-          <span class="tag green">ReportModel</span>
-          <span class="tag blue">ReportStats</span>
-          <span class="tag orange">Timeline Step</span>
-          <span class="tag">Pagination</span>
-          <span class="tag">copyWith</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#E6F1FB">🧠</div>
-        <div><h3>report_controller.dart</h3><div class="file-path">report/controllers/report_controller.dart</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">الـ Controller الأهم في التطبيق. يستمع لـ Firestore realtime، يرفع الصور، يحدد الموقع بـ GPS، يُعالج التصويت بـ Transaction، ويبني الـ Timeline. كل شيء reactive بـ Rx.</p>
-        <div class="feature-tags">
-          <span class="tag red">Realtime Listen</span>
-          <span class="tag orange">GPS Location</span>
-          <span class="tag blue">Image Upload</span>
-          <span class="tag green">Vote Transaction</span>
-          <span class="tag">Timeline Builder</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ADMIN FILES -->
-<section id="admin-files" class="page-section">
-  <div class="section-tag">🏛️ Admin Feature</div>
-  <h2 class="section-title">ملفات لوحة البلدية</h2>
-  <div class="files-grid">
-
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#FAEEDA">👷</div>
-        <div><h3>team_model.dart</h3><div class="file-path">admin/models/team_model.dart</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">نموذج فريق العمل مع: الاسم، القائد، عدد الأعضاء، البلاغات المكلّفة، والمنجزة. يُستخدم في لوحة الأدمن لإسناد البلاغات وعرض الأداء.</p>
-        <div class="feature-tags">
-          <span class="tag">TeamModel</span>
-          <span class="tag blue">Performance Metrics</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#EAF3DE">⚙️</div>
-        <div><h3>admin_controller.dart</h3><div class="file-path">admin/controllers/admin_controller.dart</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">يستمع لكل البلاغات realtime، يحسب الإحصائيات، يُحدّث الحالة في Firestore + API في نفس الوقت، ويُكلّف الفرق. يدير الـ filter للتصفية.</p>
-        <div class="feature-tags">
-          <span class="tag red">Admin Realtime</span>
-          <span class="tag blue">Update Status</span>
-          <span class="tag green">Assign Teams</span>
-          <span class="tag">Filter</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#E6F1FB">📊</div>
-        <div><h3>admin_dashboard_screen.dart</h3><div class="file-path">admin/views/</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">الشاشة الرئيسية للبلدية: 4 بطاقات إحصائيات (تم/جاري/منتظرة/إجمالي)، أزرار سريعة، آخر 5 بلاغات، وملخص فرق العمل. كلها realtime من Firestore.</p>
-        <div class="feature-tags">
-          <span class="tag green">Stats Grid</span>
-          <span class="tag blue">Quick Actions</span>
-          <span class="tag">Teams Summary</span>
-          <span class="tag orange">Live Feed</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#FAEEDA">📋</div>
-        <div><h3>admin_reports_screen.dart</h3><div class="file-path">admin/views/</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">قائمة كل البلاغات مع فلتر بالحالة. كل بلاغ عنده 3 أزرار: التفاصيل، تحديث الحالة (bottom sheet)، تكليف فريق (bottom sheet مع قائمة الفرق).</p>
-        <div class="feature-tags">
-          <span class="tag">Filter Chips</span>
-          <span class="tag blue">Status Update</span>
-          <span class="tag green">Team Assign</span>
-          <span class="tag orange">Bottom Sheets</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- OTHER FILES -->
-<section id="other-files" class="page-section">
-  <div class="section-tag">🔔 باقي الميزات</div>
-  <h2 class="section-title">Profile / Notifications / Map / Rewards</h2>
-  <div class="files-grid">
-
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#EAF3DE">🔔</div>
-        <div><h3>notifications_controller.dart</h3><div class="file-path">notifications/controllers/</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">يستمع لإشعارات Firestore realtime ويعدّ الغير مقروءة (badge). يستقبل إشعارات FCM عند فتح التطبيق ويعرضها كـ SnackBar. يدعم قراءة فردية وجماعية بـ batch.</p>
-        <div class="feature-tags">
-          <span class="tag red">Realtime Listen</span>
-          <span class="tag blue">FCM Handler</span>
-          <span class="tag green">Batch Mark Read</span>
-          <span class="tag orange">Badge Count</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#E6F1FB">🗺️</div>
-        <div><h3>map_controller.dart</h3><div class="file-path">map/controllers/</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">يستمع للبلاغات ويحوّلها لـ Markers على Google Maps. الألوان تتغير حسب الحالة والخطورة. يدعم الفلتر بالحالة ويُحرّك الكاميرا للبلاغ المختار.</p>
-        <div class="feature-tags">
-          <span class="tag green">Google Maps</span>
-          <span class="tag blue">Color Markers</span>
-          <span class="tag">Filter Map</span>
-          <span class="tag orange">Camera Move</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#FAEEDA">🎁</div>
-        <div><h3>rewards_screen.dart</h3><div class="file-path">rewards/</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">يعرض رصيد النقاط ومكتبة المكافآت (قسائم، خصومات، هدايا). يوضح ما يمكن استبداله باللون الأخضر وما لا يكفي الرصيد له باللون الأحمر مع قفل. استبدال مع تأكيد dialog.</p>
-        <div class="feature-tags">
-          <span class="tag green">Points Balance</span>
-          <span class="tag">Categories Filter</span>
-          <span class="tag blue">Can/Cannot Afford</span>
-          <span class="tag orange">Confirm Dialog</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#EAF3DE">📊</div>
-        <div><h3>my_stats_screen.dart</h3><div class="file-path">profile/views/</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">يعرض: 4 بطاقات إحصائيات (إجمالي/مصلح/نقاط/درجة)، progress bar مستوى النشاط مع 3 درجات، و6 إنجازات (مكتسبة/مقفلة) بألوان مختلفة.</p>
-        <div class="feature-tags">
-          <span class="tag">4 Stat Cards</span>
-          <span class="tag blue">Level Progress</span>
-          <span class="tag green">6 Achievements</span>
-          <span class="tag orange">Badge System</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ─── FIREBASE SETUP ─────────────────────────────────────────────────── -->
-<section id="firebase-setup" class="page-section">
-  <div class="section-tag">🔥 Firebase</div>
-  <h2 class="section-title">ربط Firebase بالمشروع — خطوة بخطوة</h2>
-  <p class="section-subtitle">اتبع هذه الخطوات بالترتيب بالضبط. الوقت المتوقع: 20-30 دقيقة.</p>
-
-  <div class="steps-list">
-
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-content">
-        <h3>إنشاء مشروع Firebase</h3>
-        <p>اذهب إلى <b>console.firebase.google.com</b> → أنشئ مشروعاً جديداً → اختر اسماً مثل "baladi-app". فعّل Google Analytics إذا أردت التتبع.</p>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-content">
-        <h3>تثبيت FlutterFire CLI</h3>
-        <div class="code-block"><span class="comment"># في الـ Terminal</span>
-dart pub global activate flutterfire_cli
-
-<span class="comment"># تأكد أنه مثبت</span>
-flutterfire --version</div>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-content">
-        <h3>ربط المشروع بـ Firebase</h3>
-        <p>شغّل هذا الأمر من داخل مجلد المشروع. سيُنشئ تلقائياً ملف <code>lib/firebase_options.dart</code>.</p>
-        <div class="code-block"><span class="comment"># من داخل مجلد المشروع</span>
-cd baladi_app
-flutterfire configure
-
-<span class="comment"># اختر مشروع Firebase الذي أنشأته</span>
-<span class="comment"># اختر android و ios (أو ما تحتاجه)</span></div>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="step-num">4</div>
-      <div class="step-content">
-        <h3>تفعيل الخدمات في Firebase Console</h3>
-        <p>من قائمة Build في الـ sidebar:</p>
-        <div class="info-grid">
-          <div class="info-item">
-            <div class="lbl">🔒 Authentication</div>
-            <div class="val">فعّل → Phone + Google</div>
-          </div>
-          <div class="info-item">
-            <div class="lbl">🗃️ Firestore Database</div>
-            <div class="val">أنشئ → Start in Test Mode</div>
-          </div>
-          <div class="info-item">
-            <div class="lbl">🗂️ Storage</div>
-            <div class="val">أنشئ → Start in Test Mode</div>
-          </div>
-          <div class="info-item">
-            <div class="lbl">📨 Cloud Messaging</div>
-            <div class="val">مفعّل تلقائياً</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="step-num">5</div>
-      <div class="step-content">
-        <h3>إعداد Google Maps API</h3>
-        <p>اذهب إلى <b>console.cloud.google.com</b> → APIs → فعّل Maps SDK for Android + iOS → انسخ الـ API key</p>
-        <div class="code-block"><span class="comment"># Android: في AndroidManifest.xml داخل &lt;application&gt;</span>
-&lt;meta-data
-  android:name="com.google.android.geo.API_KEY"
-  android:value="<span class="string">YOUR_API_KEY_HERE</span>"/&gt;
-
-<span class="comment"># iOS: في AppDelegate.swift</span>
-<span class="keyword">import</span> GoogleMaps
-GMSServices.provideAPIKey(<span class="string">"YOUR_API_KEY_HERE"</span>)</div>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="step-num">6</div>
-      <div class="step-content">
-        <h3>تحميل خط Cairo وإضافة الـ Assets</h3>
-        <p>حمّل Cairo من <b>fonts.google.com/specimen/Cairo</b> ثم ضع الملفات في:</p>
-        <div class="code-block">assets/
-└── fonts/
-    ├── Cairo-Regular.ttf
-    ├── Cairo-Medium.ttf
-    ├── Cairo-SemiBold.ttf
-    └── Cairo-Bold.ttf</div>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="step-num">7</div>
-      <div class="step-content">
-        <h3>إضافة الـ Permissions</h3>
-        <div class="code-block"><span class="comment"># Android: AndroidManifest.xml</span>
-&lt;uses-permission android:name="android.permission.INTERNET"/&gt;
-&lt;uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/&gt;
-&lt;uses-permission android:name="android.permission.CAMERA"/&gt;
-&lt;uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/&gt;
-
-<span class="comment"># iOS: Info.plist</span>
-NSLocationWhenInUseUsageDescription → <span class="string">"نحتاج موقعك لتحديد مكان البلاغ"</span>
-NSCameraUsageDescription → <span class="string">"لالتقاط صور الحفر"</span>
-NSPhotoLibraryUsageDescription → <span class="string">"لاختيار صور من معرضك"</span></div>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="step-num">8</div>
-      <div class="step-content">
-        <h3>تثبيت الحزم وتشغيل المشروع</h3>
-        <div class="code-block">flutter pub get
-flutter run
-
-<span class="comment"># إذا واجهت مشكلة في iOS</span>
-cd ios && pod install && cd ..</div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- FIREBASE RULES -->
-<section id="firebase-rules" class="page-section">
-  <div class="section-tag">🛡️ Security Rules</div>
-  <h2 class="section-title">قواعد الأمان</h2>
-  <p class="section-subtitle">ضعها في Firebase Console → Firestore → Rules. تمنع الوصول غير المصرح به.</p>
-
-  <div class="two-col">
-    <div>
-      <div style="font-weight:700;margin-bottom:8px;font-size:13px">🗃️ Firestore Rules</div>
-      <div class="code-block">rules_version = <span class="string">'2'</span>;
-service cloud.firestore {
-  match /databases/{db}/documents {
-    match /reports/{id} {
-      <span class="comment">// أي شخص يقرأ، فقط المسجل يكتب</span>
-      allow read: <span class="keyword">if</span> true;
-      allow create: <span class="keyword">if</span> request.auth != null;
-      allow update: <span class="keyword">if</span> request.auth != null;
-      allow delete: <span class="keyword">if</span> isAdmin();
-    }
-    match /users/{userId} {
-      allow read, write: <span class="keyword">if</span>
-        request.auth.uid == userId;
-      match /notifications/{n} {
-        allow read, write: <span class="keyword">if</span>
-          request.auth.uid == userId;
-      }
-    }
-    <span class="keyword">function</span> isAdmin() {
-      <span class="keyword">return</span> get(/users/$(request.auth.uid))
-        .data.role == <span class="string">'admin'</span>;
-    }
-  }
-}</div>
-    </div>
-    <div>
-      <div style="font-weight:700;margin-bottom:8px;font-size:13px">🗂️ Storage Rules</div>
-      <div class="code-block">rules_version = <span class="string">'2'</span>;
-service firebase.storage {
-  match /b/{bucket}/o {
-    match /report_images/{img} {
-      <span class="comment">// أي شخص يقرأ الصور</span>
-      allow read: <span class="keyword">if</span> true;
-      <span class="comment">// المسجل يرفع بحد 5MB</span>
-      allow write: <span class="keyword">if</span>
-        request.auth != null
-        && request.resource.size < 5242880
-        && request.resource.contentType
-           .matches(<span class="string">'image/.*'</span>);
-    }
-    match /avatars/{userId} {
-      allow read: <span class="keyword">if</span> true;
-      allow write: <span class="keyword">if</span>
-        request.auth.uid == userId
-        && request.resource.size < 2097152;
-    }
-  }
-}</div>
-    </div>
-  </div>
-</section>
-
-<!-- FIREBASE FUNCTIONS -->
-<section id="firebase-functions" class="page-section">
-  <div class="section-tag">⚡ Cloud Functions</div>
-  <h2 class="section-title">الـ 5 Cloud Functions</h2>
-  <p class="section-subtitle">تعمل على السيرفر تلقائياً — لا تحتاج باك-إند منفصل لهذه المهام.</p>
-
-  <div class="files-grid">
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#FAEEDA">🔔</div>
-        <div><h3>onReportStatusChange</h3><div class="file-path">firebase/functions/index.js</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">تُراقب كل تغيير في حقل status لأي بلاغ. عند التغيير تُرسل push notification للمبلِّغ، تحفظ الإشعار في Firestore، وتُضيف 50 نقطة إذا تحوّل البلاغ لـ "done".</p>
-        <div class="feature-tags">
-          <span class="tag red">Auto Trigger</span>
-          <span class="tag blue">FCM Push</span>
-          <span class="tag green">+50 نقطة</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#EAF3DE">⭐</div>
-        <div><h3>onReportCreated</h3><div class="file-path">firebase/functions/index.js</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">تُشغَّل عند إنشاء بلاغ جديد. تُضيف 10 نقاط للمبلِّغ، تزيد عداد البلاغات في ملفه، وتفحص إذا يستحق ترقية الدرجة (برونزية→فضية→ذهبية).</p>
-        <div class="feature-tags">
-          <span class="tag green">+10 نقطة</span>
-          <span class="tag blue">Badge Check</span>
-          <span class="tag orange">Counter++</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#E6F1FB">👍</div>
-        <div><h3>onReportVoted</h3><div class="file-path">firebase/functions/index.js</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">تُراقب التغيير في مصفوفة الـ voters. عند إضافة ناخب جديد تُضيف له 2 نقطة. تعمل بأمان لأن التصويت نفسه محمي بـ Firestore Transaction.</p>
-        <div class="feature-tags">
-          <span class="tag blue">+2 نقطة</span>
-          <span class="tag">Diff Detection</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#FAEEDA">📢</div>
-        <div><h3>sendBroadcastNotification</h3><div class="file-path">firebase/functions/index.js</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">Callable function تُستدعى من الأدمن فقط. ترسل إشعار جماعي لكل المستخدمين عبر Firebase topic. يُستخدم للإعلانات من البلدية.</p>
-        <div class="feature-tags">
-          <span class="tag red">Admin Only</span>
-          <span class="tag blue">Topic Broadcast</span>
-          <span class="tag">Auth Check</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#E6F1FB">🧹</div>
-        <div><h3>cleanupRejectedReports</h3><div class="file-path">firebase/functions/index.js</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">تعمل تلقائياً كل 30 يوم. تحذف البلاغات المرفوضة التي مضى عليها 30 يوم. تنظيف تلقائي بدون تدخل.</p>
-        <div class="feature-tags">
-          <span class="tag">Auto Schedule</span>
-          <span class="tag red">Batch Delete</span>
-          <span class="tag green">30 Days</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div style="margin-top:24px">
-    <div style="font-weight:700;margin-bottom:8px;font-size:13px">🚀 نشر الـ Functions</div>
-    <div class="code-block"><span class="comment"># من مجلد firebase/functions</span>
-cd firebase/functions
-npm install
-
-<span class="comment"># نشر كل الـ functions</span>
-firebase deploy --only functions
-
-<span class="comment"># تجربة محلياً قبل النشر</span>
-firebase emulators:start --only functions,firestore</div>
-  </div>
-</section>
-
-<!-- FIREBASE FLOW -->
-<section id="firebase-flow" class="page-section">
-  <div class="section-tag">🔄 Realtime Flow</div>
-  <h2 class="section-title">كيف يعمل الـ Realtime؟</h2>
-  <p class="section-subtitle">رحلة البلاغ من لحظة الإرسال حتى يشوفه كل المستخدمين.</p>
-
-  <div style="margin-bottom:24px">
-    <div style="font-weight:700;font-size:13px;margin-bottom:12px">📸 إرسال بلاغ جديد</div>
-    <div class="flow">
-      <div class="flow-box">المستخدم يصور</div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-box firebase">Firebase Storage<br><small style="font-size:10px">رفع الصورة</small></div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-box firebase">Firestore<br><small style="font-size:10px">حفظ البيانات</small></div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-box accent">كل المستخدمين<br><small style="font-size:10px">يشوفوا الفيد</small></div>
-    </div>
-  </div>
-
-  <div style="margin-bottom:24px">
-    <div style="font-weight:700;font-size:13px;margin-bottom:12px">🔄 تغيير الحالة من الأدمن</div>
-    <div class="flow">
-      <div class="flow-box primary">الأدمن يغيّر الحالة</div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-box firebase">Firestore Update</div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-box firebase">Cloud Function<br><small style="font-size:10px">تُشغَّل تلقائياً</small></div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-box accent">FCM Push + Firestore<br><small style="font-size:10px">إشعار فوري</small></div>
-    </div>
-  </div>
-
-  <div>
-    <div style="font-weight:700;font-size:13px;margin-bottom:12px">👂 كيف يعمل watchAllReports()</div>
-    <div class="code-block"><span class="comment">// في firebase_service.dart</span>
-Stream&lt;List&lt;ReportModel&gt;&gt; watchAllReports() {
-  <span class="keyword">return</span> _db
-    .collection(<span class="string">'reports'</span>)
-    .orderBy(<span class="string">'created_at'</span>, descending: true)
-    .snapshots()              <span class="comment">// ← يستمع realtime</span>
-    .map((snap) =&gt; snap.docs  <span class="comment">// ← كل تغيير يُطلق حدثاً</span>
-      .map((doc) =&gt; ReportModel.fromJson({...doc.data(), <span class="string">'id'</span>: doc.id}))
-      .toList());
-}
-
-<span class="comment">// في report_controller.dart</span>
-<span class="keyword">void</span> _listenToAllReports() {
-  _firebase.watchAllReports().listen((reports) {
-    allReports.assignAll(reports);  <span class="comment">// ← يُحدّث الـ UI تلقائياً</span>
-    _updateStats(reports);
-  });
-}</div>
-  </div>
-</section>
-
-<!-- RUN -->
-<section id="run" class="page-section">
-  <div class="section-tag">▶️ تشغيل المشروع</div>
-  <h2 class="section-title">الخطوات النهائية للتشغيل</h2>
-
-  <div class="setup-panels">
-    <div class="setup-panel">
-      <div class="setup-panel-header">
-        <div class="step-num" style="width:28px;height:28px;font-size:12px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;">1</div>
-        <h3>تحديث baseUrl</h3>
-        <div class="badge required">مطلوب</div>
-      </div>
-      <div class="setup-panel-body">
-        <p>افتح <code>lib/core/constants/api_constants.dart</code> وغيّر الـ baseUrl:</p>
-        <div class="code-block"><span class="keyword">static const</span> String baseUrl = <span class="string">'https://api.baladi-app.com/api/v1'</span>;
-<span class="comment">// غيّرها لـ URL السيرفر الخاص فيك</span>
-<span class="comment">// للتطوير المحلي: 'http://10.0.2.2:8000/api/v1' (Android)</span>
-<span class="comment">// للتطوير المحلي: 'http://localhost:8000/api/v1' (iOS)</span></div>
-      </div>
-    </div>
-
-    <div class="setup-panel">
-      <div class="setup-panel-header">
-        <div class="step-num" style="width:28px;height:28px;font-size:12px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;">2</div>
-        <h3>تثبيت الحزم</h3>
-        <div class="badge required">مطلوب</div>
-      </div>
-      <div class="setup-panel-body">
-        <div class="code-block">flutter pub get
-
-<span class="comment"># إذا أردت أن تعمل بدون API حقيقي الآن</span>
-<span class="comment"># الـ Firebase وحده كافٍ للـ realtime</span></div>
-      </div>
-    </div>
-
-    <div class="setup-panel">
-      <div class="setup-panel-header">
-        <div class="step-num" style="width:28px;height:28px;font-size:12px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;">3</div>
-        <h3>تشغيل التطبيق</h3>
-        <div class="badge required">مطلوب</div>
-      </div>
-      <div class="setup-panel-body">
-        <div class="code-block">flutter run
-
-<span class="comment"># لتشغيل على جهاز محدد</span>
-flutter devices
-flutter run -d device_id
-
-<span class="comment"># لبناء APK للأندرويد</span>
-flutter build apk --release
-
-<span class="comment"># لبناء IPA للآيفون</span>
-flutter build ipa</div>
-      </div>
-    </div>
-
-    <div class="setup-panel">
-      <div class="setup-panel-header">
-        <div class="step-num" style="width:28px;height:28px;font-size:12px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;">4</div>
-        <h3>إضافة مستخدم أدمن</h3>
-        <div class="badge optional">اختياري</div>
-      </div>
-      <div class="setup-panel-body">
-        <p>بعد تسجيل أول مستخدم، اذهب لـ Firestore Console واضف حقل role = "admin" يدوياً، أو اعمل صفحة sign-up مخصصة للأدمن.</p>
-        <div class="code-block"><span class="comment">// Firestore: users/{userId}</span>
-{
-  name: <span class="string">"اسم الأدمن"</span>,
-  role: <span class="string">"admin"</span>,   <span class="comment">// ← أضف هذا</span>
-  points: 0,
-  badge: <span class="string">"gold"</span>
-}</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- DEPENDENCIES -->
-<section id="dependencies" class="page-section">
-  <div class="section-tag">📦 Dependencies</div>
-  <h2 class="section-title">الحزم والمكتبات المستخدمة</h2>
-
-  <div class="files-grid">
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#EAF3DE">⚡</div>
-        <div><h3>get: ^4.6.6</h3><div class="file-path">State Management + Navigation</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">GetX للـ state management بـ Rx + Controllers، والـ navigation بدون context، و Dependency Injection بـ Get.lazyPut و Get.find.</p>
-      </div>
-    </div>
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#fff3e0">🔥</div>
-        <div><h3>Firebase Suite</h3><div class="file-path">firebase_core, auth, firestore, storage, messaging</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">firebase_core للتهيئة، firebase_auth للمصادقة، cloud_firestore للـ realtime database، firebase_storage لرفع الصور، firebase_messaging للإشعارات.</p>
-      </div>
-    </div>
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#E6F1FB">🗺️</div>
-        <div><h3>google_maps_flutter + geolocator</h3><div class="file-path">Maps + Location</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">google_maps_flutter للخريطة التفاعلية مع الـ markers، geolocator لتحديد الموقع بـ GPS، geocoding لتحويل الإحداثيات لعنوان نصي.</p>
-      </div>
-    </div>
-    <div class="file-card">
-      <div class="file-card-header">
-        <div class="file-icon" style="background:#FAEEDA">📷</div>
-        <div><h3>image_picker + http</h3><div class="file-path">Media + Networking</div></div>
-      </div>
-      <div class="file-card-body">
-        <p class="file-desc">image_picker لالتقاط صور من الكاميرا أو المعرض، http للـ REST API requests مع دعم multipart لرفع الصور، shared_preferences لحفظ البيانات محلياً.</p>
-      </div>
-    </div>
-  </div>
-
-  <div style="margin-top:20px">
-    <div class="code-block"><span class="comment"># تثبيت كل الحزم بأمر واحد</span>
-flutter pub add get firebase_core firebase_auth cloud_firestore firebase_storage \
-  firebase_messaging google_maps_flutter geolocator geocoding \
-  image_picker http shared_preferences uuid cached_network_image</div>
-  </div>
-</section>
-
-<!-- Footer -->
-<section class="page-section" style="background:var(--primary);color:#fff;text-align:center;padding:40px">
-  <div style="font-size:32px;margin-bottom:10px">🛣️</div>
-  <div style="font-size:20px;font-weight:800;margin-bottom:6px">بلدي — مشروع كامل</div>
-  <div style="font-size:12px;color:var(--muted-dark)">51 ملف Dart · 5 Cloud Functions · 20+ شاشة · 8800 سطر</div>
-  <div style="margin-top:16px;font-size:11px;color:var(--muted-dark)">Flutter + GetX + Firebase Realtime + Google Maps</div>
-</section>
 
 </main>
-
 <script>
-// Sidebar active state
-document.querySelectorAll('.nav-item').forEach(item => {
-  item.addEventListener('click', () => {
-    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-    item.classList.add('active');
-  });
-});
-
-// Highlight sidebar on scroll
-const sections = document.querySelectorAll('section[id]');
-const navItems = document.querySelectorAll('.nav-item');
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(section => {
-    const top = section.offsetTop - 80;
-    if(pageYOffset >= top) current = section.getAttribute('id');
-  });
-  navItems.forEach(item => {
-    item.classList.remove('active');
-    if(item.getAttribute('href') === '#' + current) item.classList.add('active');
-  });
-});
+const navItems=document.querySelectorAll('.nav-item'),sections=document.querySelectorAll('section[id]');
+window.addEventListener('scroll',()=>{let c='';sections.forEach(x=>{if(pageYOffset>=x.offsetTop-80)c=x.id});
+navItems.forEach(i=>{i.classList.toggle('active',i.getAttribute('href')==='#'+c)})});
 </script>
-</body>
-</html>
+</body></html>
